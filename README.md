@@ -1,23 +1,37 @@
-#To-DO List
-##Description
-This project is a React application created with Vite. It is a to-do list application that demonstrates structure and development workflow using Vite.
+# To-Do List
 
-##Installation 
-1. Clone repository:
-'''bash git clone https://github.com/BII95/todo-list'''
+## Description
 
-2. Navigate to project directory:
-'''bash cd todo-list'''
-3. Install project dependencies:
-'''bash
-npm install
-'''
+This project is a React application created with Vite. It is a to-do list application that demonstrates the project structure and development workflow using Vite.
 
-4. Start Vite development server by running:
-'''bash
-npm run dev
-'''
-5. Open local URL displayed in terminal in web browser.
-'http://localhost:5173'
+## Installation
 
+1. Clone the repository:
 
+   ```bash
+   git clone https://github.com/BII95/todo-list
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd todo-list
+   ```
+
+3. Install the project dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the Vite development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open the local URL displayed in the terminal in your web browser (typically):
+
+   ```
+   http://localhost:5173
+   ```
