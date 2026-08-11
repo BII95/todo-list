@@ -25,14 +25,14 @@ function App() {
         }
       );
 
-      setTodoList(previous => [previous,...updatedTodos])
+      setTodoList(updatedTodos)
     }
   
   return (
     <div>
       <h1>Todo List</h1>
       <TodoForm onAddTodo={addTodo}/>
-      <TodoList todoList={todoList} />
+      <TodoList onCompleteTodo={completeTodo} todoList={todoList} />
     </div>
   );
 }
