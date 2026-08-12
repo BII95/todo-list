@@ -29,7 +29,8 @@ function TodoForm({onAddTodo}) {
                 required/>
             <button 
                 type="submit"
-                disabled={!workingTodoTitle.trim()}
+                disabled=
+                {!workingTodoTitle.trim()}
              >
                 Add Todo
             </button>
