@@ -1,17 +1,17 @@
-import { useRef } from "react";
+import { useRef,useState } from "react";
 function TodoForm({onAddTodo}) {
     const inputRef = useRef();
+    const [workingTodoTitle,setTodoTitle]=useState('');
+    const handleInputChange = (event) => {
+        setTodoTitle(event.target.value)
+    }
     const handleAddTodo = (event) => {
         event.preventDefault();
-        
-    // .trim prevents whitespace only todos
-    const todoTitle = event.target.todoTitle.value.trim();
-    if (todoTitle && todoTitle !== "") {
-      onAddTodo(todoTitle);
-      event.target.reset();
-      inputRef.current.focus();
+        onAddTodo(workingTodoTitle);
+        inputRef.current.focus();
+        setTodoTitle('')
     }
-    };
+
 
     
     
@@ -23,9 +23,15 @@ function TodoForm({onAddTodo}) {
                 type="text" 
                 id="todoTitle"
                 name="todoTitle"
+                value = {workingTodoTitle}
+                onChange={handleInputChange}
                 placeholder={'Todo text'}
                 required/>
-            <button type="submit" >
+            <button 
+                type="submit"
+                disabled=
+                {!workingTodoTitle.trim()}
+             >
                 Add Todo
             </button>
         </form>
