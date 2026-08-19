@@ -20,16 +20,13 @@ function TodoForm({onAddTodo}) {
     
     return (
         <form onSubmit={handleAddTodo}>
-            <label htmlFor="todoTitle">Todo</label>
-            <input 
+            <TextInputWithLabel
+                elementId="todoTitle"
                 ref={inputRef}
-                type="text" 
-                id="todoTitle"
-                name="todoTitle"
                 value = {workingTodoTitle}
                 onChange={handleInputChange}
-                placeholder={'Todo text'}
-                required/>
+                labelText="Todo"            
+            />
             <button 
                 type="submit"
                 disabled=

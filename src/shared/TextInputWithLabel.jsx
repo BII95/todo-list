@@ -10,13 +10,14 @@ export default function TextInputWithLabel({
         <label 
             htmlFor={elementId}>{labelText}
         </label>
-        <input>
+        <input
             type = "text"
             id = {elementId}
             ref = {ref}
             value = {value}
             onChange = {onChange}
-        </input>
+        />
+        
         </>
     )
 }
