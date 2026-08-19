@@ -14,7 +14,6 @@ function App() {
     setTodoList(previous => [newTodo,...previous])
   }
 
-
   function completeTodo(id){
     const updatedTodos = todoList.map(todo => {
         if (todo.id === id){
@@ -28,12 +27,27 @@ function App() {
 
       setTodoList(updatedTodos)
     }
-  
+    
+    function updateTodo(editedTodo){
+      let updatedTodos2 = todoList.map(todo => {
+        if(todo.id === editedTodo){
+          const destructured= { ...todo}
+          return destructured
+        }else {
+          return todo
+        }
+      }
+    );
+      setTodoList(updatedTodos2)
+    }
   return (
     <div>
       <h1>Todo List</h1>
       <TodoForm onAddTodo={addTodo}/>
-      <TodoList onCompleteTodo={completeTodo} todoList={todoList} />
+      <TodoList onCompleteTodo={completeTodo} 
+                todoList={todoList}
+                onUpdateTodo={updateTodo}
+                />
     </div>
   );
 }
