@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
 
-export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo}){
+export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo,elementId}){
     const [isEditing,setIsEditing]=useState(false)
     const [workingTitle,setWorkingTitle]=useState(todo.title)
     function handleCancel(){
@@ -29,7 +29,8 @@ export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo}){
                     <>
                     <TextInputWithLabel
                         value = {workingTitle}
-                        onChange={handleEdit}            
+                        onChange={handleEdit}
+                        elementId={elementId}            
                     />
                     <button type="button"
                             onClick={() => handleCancel()}
