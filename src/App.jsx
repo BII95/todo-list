@@ -29,10 +29,9 @@ function App() {
     }
     
     function updateTodo(editedTodo){
-      let updatedTodos2 = todoList.map(todo => {
-        if(todo.id === editedTodo){
-          const destructured= { ...todo}
-          return destructured
+      const updatedTodos2 = todoList.map(todo => {
+        if(todo.id === editedTodo.id){
+          return{ ...editedTodo}; 
         }else {
           return todo
         }
