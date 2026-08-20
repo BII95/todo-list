@@ -2,7 +2,7 @@ import { useState } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
 import { isValidTodoTitle } from "../../utils/todoValidation";
 
-export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo,elementId}){
+export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo}){
     const [isEditing,setIsEditing]=useState(false)
     const [workingTitle,setWorkingTitle]=useState(todo.title)
     function handleCancel(){
@@ -32,8 +32,7 @@ export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo,elementId
                     <>
                     <TextInputWithLabel
                         value = {workingTitle}
-                        onChange={handleEdit}
-                        elementId={elementId}  
+                        onChange={handleEdit}  
                         labelText="Todo"
                     />
                     <button type="button"
