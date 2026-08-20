@@ -30,7 +30,8 @@ export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo,elementId
                     <TextInputWithLabel
                         value = {workingTitle}
                         onChange={handleEdit}
-                        elementId={elementId}            
+                        elementId={elementId}  
+                        labelText="Todo"
                     />
                     <button type="button"
                             onClick={() => handleCancel()}
