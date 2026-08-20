@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TextInputWithLabel from "../../shared/TextInputWithLabel";
+import { isValidTodoTitle } from "../../utils/todoValidation";
 
 export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo,elementId}){
     const [isEditing,setIsEditing]=useState(false)
@@ -16,10 +17,12 @@ export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo,elementId
             return;
         }
         event.preventDefault();
+
+        if (!isValidTodoTitle(workingTitle)) {
+            return;
+            }
         onUpdateTodo({...todo, title: workingTitle});
-
         setIsEditing(false)
-
     }
 
     return(
