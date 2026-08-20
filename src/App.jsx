@@ -1,7 +1,7 @@
 import  './App.css';
 import TodoList from './features/TodoList/TodoList.jsx';
 import TodoForm from './features/TodoForm.jsx';
-
+import { isValidTodoTitle } from './utils/todoValidation.js';
 import { useState } from 'react';
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
     
     function updateTodo(editedTodo){
       const updatedTodos2 = todoList.map(todo => {
-        if(todo.id === editedTodo.id){
+        if(todo.id === editedTodo.id && isValidTodoTitle(editedTodo.id)){
           return{ ...editedTodo}; 
         }else {
           return todo
