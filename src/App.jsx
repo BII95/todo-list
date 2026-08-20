@@ -30,7 +30,7 @@ function App() {
     
     function updateTodo(editedTodo){
       const updatedTodos2 = todoList.map(todo => {
-        if(todo.id === editedTodo.id && isValidTodoTitle(editedTodo.id)){
+        if(todo.id === editedTodo.id && isValidTodoTitle(editedTodo.title)){
           return{ ...editedTodo}; 
         }else {
           return todo
