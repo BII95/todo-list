@@ -82,7 +82,7 @@ export default function TodosPage({token}){
           );
     
           setTodoList(updatedTodos)
-          const response = await fetch('/api/tasks/${id}',{
+          const response = await fetch(`/api/tasks/${id}`,{
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' , 
             'X-CSRF-TOKEN' : token
@@ -102,7 +102,8 @@ export default function TodosPage({token}){
           }
         }
         
-        function updateTodo(editedTodo){
+        async function updateTodo(editedTodo){
+          const originalTodo = todoList.find(todo => todo.id === editedTodo.id)
           const updatedTodos2 = todoList.map(todo => {
             if(todo.id === editedTodo.id){
               return{ ...editedTodo}; 
@@ -112,12 +113,45 @@ export default function TodosPage({token}){
           }
         );
           setTodoList(updatedTodos2)
+          const response = await fetch(`/api/tasks/${editedTodo.id}`, {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'X-CSRF-TOKEN': token
+              },
+              credentials: 'include',
+              body: JSON.stringify({
+                  title: editedTodo.title,
+                  isCompleted: editedTodo.isCompleted
+              })
+            })
+            if (!response.ok){
+              setTodoList(previous =>
+                previous.map(todo =>
+                  todo.id === editedTodo ? originalTodo : todo
+                )
+              )
+              setApiError('Failed to update todo')
+            }
+
+
         }
 
     return(
         <div>
+            {error && (
+              <div>
+                <p>{error}</p>
+                <button onClick={()=> setApiError(null)}>
+                  Clear Error
+                </button>
+              </div>  
+            )}
+            {isTodoListLoading && <p>Loading...</p>}
+
             <TodoForm onAddTodo={addTodo}/>
-            <TodoList onCompleteTodo={completeTodo} 
+            <TodoList 
+                onCompleteTodo={completeTodo} 
                 todoList={todoList}
                 onUpdateTodo={updateTodo}
                 />
