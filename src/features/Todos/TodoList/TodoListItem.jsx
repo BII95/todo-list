@@ -42,8 +42,8 @@ export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo,elementId
                     >
                         Cancel
                     </button>
-                    <button type="button"
-                            onClick={handleUpdate}>
+                    <button type="submit"
+                            >
                         Update
                     </button>
                     </>
