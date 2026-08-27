@@ -130,7 +130,7 @@ export default function TodosPage({token}){
             if (!response.ok){
               setTodoList(previous =>
                 previous.map(todo =>
-                  todo.id === editedTodo ? originalTodo : todo
+                  todo.id === editedTodo.id ? originalTodo : todo
                 )
               )
               setApiError('Failed to update todo')
