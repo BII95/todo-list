@@ -7,38 +7,7 @@ export default function TodosPage({token}){
       const [error,setApiError]= useState('')
       const[isTodoListLoading,setLoading]= useState(false)
       
-      useEffect(() => {
-        (async () => {
-          try {
-            if(!token) return
-            const params =new URLSearchParams({
-                limit:100,})
-
-            setLoading(true);
-            // await new Promise(resolve => setTimeout(resolve, 1000))
-            const resp = await fetch(`/api/tasks?${params}`,{
-              headers:{
-                'X-CSRF-TOKEN' : token,
-              },
-              credentials: 'include'
-            });
-            if (resp.status === 401) {
-                throw new Error("Unauthorized")
-            } 
-            if (!resp.ok) {
-              throw new Error('Something went wrong')
-            }else {
-              const fetchData= await resp.json()
-              setTodoList(fetchData.tasks)
-            }
-          } catch (error) {
-              setApiError(`Error: ${error.name} | ${error.message}`);
-            }finally {
-              setLoading(false);
-          }
-        })();
-      }, [token]);
-
+      useEffect(() => { async function fetchTodos() { try { setLoading(true); const params = new URLSearchParams({ limit: 100 }); const response = await fetch(`/api/tasks?${params}`, { headers: { 'X-CSRF-TOKEN': token }, credentials: 'include' }); if (response.status === 401) { throw new Error('Unauthorized'); } if (!response.ok) { throw new Error('Something went wrong'); } const data = await response.json(); setTodoList(data.tasks); } catch (error) { setApiError(`Error: ${error.name} | ${error.message}`); } finally { setLoading(false); } } if (token) { fetchTodos(); } }, [token]);
       async function addTodo(todoTitle) {
           let newTodo = {
               id: Date.now(),
