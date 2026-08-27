@@ -32,6 +32,7 @@ export default function Logon ({onSetEmail,onSetToken}){
     }
     return (
         <form onSubmit={handleSubmit}>
+            {authError && <p>{authError}</p>}
             {/* <TextInputWithLabel
             ></TextInputWithLabel> */}
             <label htmlFor="email">Email</label>
@@ -55,8 +56,6 @@ export default function Logon ({onSetEmail,onSetToken}){
                         {isLoggingOn ? "Logging in..." : "Log On"}
                         
             </button>
-            {authError && <p>{authError}</p>}
-
         </form>
     )
 }
