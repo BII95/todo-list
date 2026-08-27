@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import TodoList from './TodoList/TodoList';
+import TodoForm from './TodoForm';
 export default function TodosPage(){
       const [todoList,setTodoList]=useState([])
       
@@ -35,5 +37,15 @@ export default function TodosPage(){
         );
           setTodoList(updatedTodos2)
         }
+
+    return(
+        <div>
+            <TodoForm onAddTodo={addTodo}/>
+            <TodoList onCompleteTodo={completeTodo} 
+                todoList={todoList}
+                onUpdateTodo={updateTodo}
+                />
+        </div>
+    )
     
 }
