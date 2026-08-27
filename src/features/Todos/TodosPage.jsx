@@ -144,12 +144,12 @@ export default function TodosPage({token}){
             {error && (
               <div>
                 <p>{error}</p>
-                <button onClick={()=> setApiError(null)}>
+                <button onClick={()=> setApiError('')}>
                   Clear Error
                 </button>
               </div>  
             )}
-            
+            {isTodoListLoading && <p>Loading...</p>}
 
             <TodoForm onAddTodo={addTodo}/>
             
@@ -158,7 +158,7 @@ export default function TodosPage({token}){
                 todoList={todoList}
                 onUpdateTodo={updateTodo}
                 />
-            {isTodoListLoading && <p>Loading...</p>}
+            
         </div>
     )
     
