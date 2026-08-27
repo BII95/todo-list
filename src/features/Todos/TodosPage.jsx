@@ -15,7 +15,7 @@ export default function TodosPage({token}){
                 limit:100,})
 
             setLoading(true);
-            await new Promise(resolve => setTimeout(resolve, 1000))
+            // await new Promise(resolve => setTimeout(resolve, 1000))
             const resp = await fetch(`/api/tasks?${params}`,{
               headers:{
                 'X-CSRF-TOKEN' : token,
