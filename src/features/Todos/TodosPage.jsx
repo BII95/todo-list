@@ -69,7 +69,8 @@ export default function TodosPage({token}){
         }
       }
     
-      function completeTodo(id){
+      async function completeTodo(id){
+        const originalTodo = todoList.find(todo => todo.id === id)
         const updatedTodos = todoList.map(todo => {
             if (todo.id === id){
               const newObj = { ...todo, isCompleted: true}
@@ -81,6 +82,24 @@ export default function TodosPage({token}){
           );
     
           setTodoList(updatedTodos)
+          const response = await fetch('/api/tasks/${id}',{
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' , 
+            'X-CSRF-TOKEN' : token
+                },
+            credentials: 'include',
+            body: JSON.stringify({
+              isCompleted: true
+            })
+          });
+          if (!response.ok){
+            setTodoList(previous => 
+              previous.map(todo =>
+                todo.id === id ? originalTodo : todo
+              )
+            )
+            setApiError('Failed to complete todo')
+          }
         }
         
         function updateTodo(editedTodo){
