@@ -6,6 +6,8 @@ export default function Logon ({onSetEmail,onSetToken}){
     const [authError,setAuthError]=useState('')
     const [isLoggingOn,setIsLoggingOn]=useState(false)
     async function handleSubmit(event) {
+         event.preventDefault();
+
         try{ 
             setIsLoggingOn(true)
             const response = await fetch('/api/users/logon', {
@@ -16,7 +18,6 @@ export default function Logon ({onSetEmail,onSetToken}){
             });
             const data = await response.json();
             if (response.status === 200 && data.name && data.csrfToken) {
-                event.preventdefault();
                 onSetEmail(data.name);
                 onSetToken(data.csrfToken);
 
@@ -38,18 +39,23 @@ export default function Logon ({onSetEmail,onSetToken}){
                 id="email"
                 type="text"
                 value={email}
-                onSubmit={handleSubmit}
+                onChange={(event) => setEmail(event.target.value)}
                 required
             />
             <label htmlFor="password">Password</label>
             <input 
                 id="password"
-                type="text"
+                type="password"
                 value={password}
-                onSubmit={handleSubmit}
+                onChange={(event) => setPassword(event.target.value)}
                 required
             />
-            <button type="submit">Submit</button>
+            <button type="submit"
+                    disabled={isLoggingOn}>
+                        {isLoggingOn ? "Logging in..." : "Log On"}
+                        
+            </button>
+            {authError && <p>{authError}</p>}
 
         </form>
     )
