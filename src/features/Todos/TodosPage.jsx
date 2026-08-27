@@ -15,6 +15,7 @@ export default function TodosPage({token}){
                 limit:100,})
 
             setLoading(true);
+            await new Promise(resolve => setTimeout(resolve, 1000))
             const resp = await fetch(`/api/tasks?${params}`,{
               headers:{
                 'X-CSRF-TOKEN' : token,
@@ -92,6 +93,7 @@ export default function TodosPage({token}){
               isCompleted: true
             })
           });
+          
           if (!response.ok){
             setTodoList(previous => 
               previous.map(todo =>
@@ -147,14 +149,16 @@ export default function TodosPage({token}){
                 </button>
               </div>  
             )}
-            {isTodoListLoading && <p>Loading...</p>}
+            
 
             <TodoForm onAddTodo={addTodo}/>
+            
             <TodoList 
                 onCompleteTodo={completeTodo} 
                 todoList={todoList}
                 onUpdateTodo={updateTodo}
                 />
+            {isTodoListLoading && <p>Loading...</p>}
         </div>
     )
     
