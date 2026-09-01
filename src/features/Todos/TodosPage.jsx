@@ -1,16 +1,21 @@
 import { useState,useEffect } from 'react';
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
+import SortBy from '../../shared/SortBy';
 
 export default function TodosPage({token}){
       const [todoList,setTodoList]=useState([])
       const [error,setApiError]= useState('')
       const[isTodoListLoading,setLoading]= useState(false)
-      
+      const[sortBy,setSortBy]=useState('createdAt')
+      const[sortDirection,setSortDirection]=useState('desc')
       useEffect(() => { async function fetchTodos() 
         { try { 
           setLoading(true); 
-          const params = new URLSearchParams({ limit: 100 }); 
+          const params = new URLSearchParams({
+                sortBy,
+                sortDirection,
+                limit: 100 }); 
           const response = await fetch(`/api/tasks?${params}`, 
             { headers: { 'X-CSRF-TOKEN': token }, credentials: 'include' }); 
             if (response.status === 401) { throw new Error('Unauthorized'); } 
@@ -22,7 +27,7 @@ export default function TodosPage({token}){
             setApiError(`Error: ${error.name} | ${error.message}`);
            } finally { 
             setLoading(false); 
-          } } if (token) { fetchTodos(); } }, [token]);
+          } } if (token) { fetchTodos(); } }, [token,sortBy,sortDirection]);
       async function addTodo(todoTitle) {
           let newTodo = {
               id: Date.now(),
@@ -161,7 +166,12 @@ export default function TodosPage({token}){
               </div>  
             )}
             {isTodoListLoading && <p>Loading...</p>}
-
+            <SortBy onSortByChange={setSortBy}
+                    onSortDirectionChange={setSortDirection}
+                    sortBy={sortBy}
+                    sortDirection={sortDirection}
+        
+                />
             <TodoForm onAddTodo={addTodo}/>
             
             <TodoList 
