@@ -2,21 +2,29 @@ import { useState,useEffect } from 'react';
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
-
+import useDebounce from '../../utils/useDebounce';
+import FilterInput from '../../shared/FilterInput';
 export default function TodosPage({token}){
       const [todoList,setTodoList]=useState([])
       const [error,setApiError]= useState('')
       const[isTodoListLoading,setLoading]= useState(false)
       const[sortBy,setSortBy]=useState('createdAt')
       const[sortDirection,setSortDirection]=useState('desc')
+      const[filterTerm,setFilterTerm]=useState('');
+      const debouncedFilterTerm= useDebounce(filterTerm,300);
+
       useEffect(() => { async function fetchTodos() 
         { try { 
           setLoading(true); 
-          const params = new URLSearchParams({
+          const params = {
                 sortBy,
                 sortDirection,
-                limit: 100 }); 
-          const response = await fetch(`/api/tasks?${params}`, 
+                limit: 100 }; 
+          if(debouncedFilterTerm){
+            params.find = debouncedFilterTerm;
+          }
+          const parameters = new URLSearchParams(params)
+          const response = await fetch(`/api/tasks?${parameters}`, 
             { headers: { 'X-CSRF-TOKEN': token }, credentials: 'include' }); 
             if (response.status === 401) { throw new Error('Unauthorized'); } 
             if (!response.ok) { throw new Error('Something went wrong');   
@@ -27,7 +35,8 @@ export default function TodosPage({token}){
             setApiError(`Error: ${error.name} | ${error.message}`);
            } finally { 
             setLoading(false); 
-          } } if (token) { fetchTodos(); } }, [token,sortBy,sortDirection]);
+          } } if (token) { fetchTodos(); } }, [token,sortBy,sortDirection,debouncedFilterTerm]);
+        const handleFilterChange = (newTerm) => { setFilterTerm(newTerm); }; 
       async function addTodo(todoTitle) {
           let newTodo = {
               id: Date.now(),
@@ -172,6 +181,9 @@ export default function TodosPage({token}){
                     sortDirection={sortDirection}
         
                 />
+            <FilterInput
+                filterTerm={filterTerm}
+                onFilterChange={handleFilterChange}/>
             <TodoForm onAddTodo={addTodo}/>
             
             <TodoList 
