@@ -6,14 +6,14 @@ import useDebounce from '../../utils/useDebounce';
 import FilterInput from '../../shared/FilterInput';
 export default function TodosPage({token}){
       const [todoList,setTodoList]=useState([])
-      const [error,setApiError]= useState('')
+      const [error,setError]= useState('')
       const[isTodoListLoading,setLoading]= useState(false)
       const[sortBy,setSortBy]=useState('createdAt')
       const[sortDirection,setSortDirection]=useState('desc')
       const[filterTerm,setFilterTerm]=useState('');
       const debouncedFilterTerm= useDebounce(filterTerm,300);
       const [dataVersion,setDataVersion]=useState(0);
-
+      const [filterError,setFilterError]=useState("")
       const invalidateCache = useCallback(() =>
         {
             setDataVersion(prev => prev+1)
@@ -37,12 +37,19 @@ export default function TodosPage({token}){
             if (!response.ok) { throw new Error('Something went wrong');   
             } 
             const data = await response.json(); 
-            setTodoList(data.tasks); 
-          } catch (error) { 
-            setApiError(`Error: ${error.name} | ${error.message}`);
-           } finally { 
+            setTodoList(data.tasks);
+            setFilterError(''); 
+          } catch (error) {
+                if (debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'desc') {
+                    setFilterError(`Error filtering/sorting todos: ${error.message}`);
+                } else {
+                    setError(`Error fetching todos: ${error.message}`);
+                }
+        }finally { 
             setLoading(false); 
-          } } if (token) { fetchTodos(); } }, [token,sortBy,sortDirection,debouncedFilterTerm]);
+          } } if (token) { 
+                fetchTodos();
+            } }, [token,sortBy,sortDirection,debouncedFilterTerm]);
         const handleFilterChange = (newTerm) => { setFilterTerm(newTerm); }; 
         
         async function addTodo(todoTitle) {
@@ -85,7 +92,7 @@ export default function TodosPage({token}){
                   previous.filter(todo => todo.id !== newTodo.id)
               )
 
-              setApiError(`Error: ${error.message}`)
+              setError(`Error: ${error.message}`)
           }
       }
       async function completeTodo(id) {
@@ -125,7 +132,7 @@ export default function TodosPage({token}){
                 todo.id === id ? originalTodo : todo
             )
         )
-        setApiError(`Error: ${error.message}`)
+        setError(`Error: ${error.message}`)
     }
 }
         
@@ -172,7 +179,7 @@ export default function TodosPage({token}){
         )
         
 
-        setApiError(`Error: ${error.message}`)
+        setError(`Error: ${error.message}`)
     }
 }
 
@@ -181,11 +188,32 @@ export default function TodosPage({token}){
             {error && (
               <div>
                 <p>{error}</p>
-                <button onClick={()=> setApiError('')}>
+                <button onClick={()=> setError('')}>
                   Clear Error
                 </button>
               </div>  
             )}
+            {filterError && (
+              <div>
+                <p>{filterError}</p>
+                <button onClick={()=> setFilterError('')}>
+                  Clear Filter Error
+                </button>
+                
+                <button onClick={()=>{
+                    setFilterTerm('')
+                    setSortBy('createdAt')
+                    setSortDirection('desc')
+                    setFilterError('')
+                }}>
+                  Reset Filters
+                
+                </button>
+                            
+                
+              </div>  
+            )}
+
             {isTodoListLoading && <p>Loading...</p>}
             <SortBy onSortByChange={setSortBy}
                     onSortDirectionChange={setSortDirection}
