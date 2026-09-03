@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect, useCallback } from 'react';
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
@@ -12,6 +12,13 @@ export default function TodosPage({token}){
       const[sortDirection,setSortDirection]=useState('desc')
       const[filterTerm,setFilterTerm]=useState('');
       const debouncedFilterTerm= useDebounce(filterTerm,300);
+      const [dataVersion,setDataVersion]=useState(0);
+
+      const invalidateCache = useCallback(() =>
+        {
+            setDataVersion(prev => prev+1)
+            console.log("invalidating memo cache after todo mutation")    
+        },[]);  
 
       useEffect(() => { async function fetchTodos() 
         { try { 
@@ -37,7 +44,8 @@ export default function TodosPage({token}){
             setLoading(false); 
           } } if (token) { fetchTodos(); } }, [token,sortBy,sortDirection,debouncedFilterTerm]);
         const handleFilterChange = (newTerm) => { setFilterTerm(newTerm); }; 
-      async function addTodo(todoTitle) {
+        
+        async function addTodo(todoTitle) {
           let newTodo = {
               id: Date.now(),
               title: todoTitle,
@@ -70,7 +78,8 @@ export default function TodosPage({token}){
                   previous.map(todo =>
                       todo.id === newTodo.id ? savedTodo : todo
                   )
-              )
+              );
+              invalidateCache();
           } catch (error) {
               setTodoList(previous =>
                   previous.filter(todo => todo.id !== newTodo.id)
@@ -108,6 +117,7 @@ export default function TodosPage({token}){
         if (!response.ok) {
             throw new Error('Failed to complete todo')
         }
+        invalidateCache();
 
     } catch (error) {
         setTodoList(previous =>
@@ -115,7 +125,6 @@ export default function TodosPage({token}){
                 todo.id === id ? originalTodo : todo
             )
         )
-
         setApiError(`Error: ${error.message}`)
     }
 }
@@ -152,6 +161,8 @@ export default function TodosPage({token}){
         if (!response.ok) {
             throw new Error('Failed to update todo')
         }
+        invalidateCache();
+
 
     } catch (error) {
         setTodoList(previous =>
@@ -159,6 +170,7 @@ export default function TodosPage({token}){
                 todo.id === editedTodo.id ? originalTodo : todo
             )
         )
+        
 
         setApiError(`Error: ${error.message}`)
     }
@@ -190,6 +202,7 @@ export default function TodosPage({token}){
                 onCompleteTodo={completeTodo} 
                 todoList={todoList}
                 onUpdateTodo={updateTodo}
+                dataVersion={dataVersion}
                 />
             
         </div>
