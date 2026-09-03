@@ -39,6 +39,7 @@ export default function TodosPage({token}){
             const data = await response.json(); 
             setTodoList(data.tasks);
             setFilterError(''); 
+            setError('');
           } catch (error) {
                 if (debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'desc') {
                     setFilterError(`Error filtering/sorting todos: ${error.message}`);
