@@ -1,6 +1,6 @@
 export default function SortBy({sortBy,sortDirection,onSortByChange,onSortDirectionChange}){
     return(<>
-        <label htmlFor="Sort by">Sort by:</label>
+        <label htmlFor="sortOptions">Sort by:</label>
             <select name="sortOptions" 
                     id="sortOptions"
                     value={sortBy}
@@ -9,7 +9,7 @@ export default function SortBy({sortBy,sortDirection,onSortByChange,onSortDirect
             <option value="title">Title</option>
             </select>
 
-         <label htmlFor="Order">Order:</label>
+         <label htmlFor="orderOptions">Order:</label>
             <select name="orderOptions" 
                     id="orderOptions"
                     value={sortDirection}
