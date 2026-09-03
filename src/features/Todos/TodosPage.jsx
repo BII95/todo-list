@@ -17,7 +17,7 @@ export default function TodosPage({token}){
       const invalidateCache = useCallback(() =>
         {
             setDataVersion(prev => prev+1)
-            // console.log("invalidating memo cache after todo mutation")    
+            console.log("invalidating memo cache after todo mutation")    
         },[]);  
 
       useEffect(() => { async function fetchTodos() 
@@ -194,6 +194,8 @@ export default function TodosPage({token}){
                 </button>
               </div>  
             )}
+
+            
             {filterError && (
               <div>
                 <p>{filterError}</p>
