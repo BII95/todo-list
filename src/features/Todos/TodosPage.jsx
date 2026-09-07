@@ -1,20 +1,35 @@
-import { useState,useEffect, useCallback } from 'react';
+import { useState,useEffect, useCallback,useReducer } from 'react';
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
 import useDebounce from '../../utils/useDebounce';
 import FilterInput from '../../shared/FilterInput';
+import {
+    todoReducer,
+    initialTodoState,
+    TODO_ACTIONS,
+} from '../../reducers/todoReducer';
 export default function TodosPage({token}){
-      const [todoList,setTodoList]=useState([])
-      const [error,setError]= useState('')
-      const [filterError,setFilterError]=useState("")
+    //   const [todoList,setTodoList]=useState([])
+    //   const [error,setError]= useState('')
+    //   const [filterError,setFilterError]=useState("")
 
-      const[isTodoListLoading,setIsTodoListLoading]= useState(true)
-      const[sortBy,setSortBy]=useState('createdAt')
-      const[sortDirection,setSortDirection]=useState('asc')
-      const[filterTerm,setFilterTerm]=useState('');
-      const [dataVersion,setDataVersion]=useState(0);
-      
+    //   const[isTodoListLoading,setIsTodoListLoading]= useState(true)
+    //   const[sortBy,setSortBy]=useState('createdAt')
+    //   const[sortDirection,setSortDirection]=useState('asc')
+    //   const[filterTerm,setFilterTerm]=useState('');
+    //   const [dataVersion,setDataVersion]=useState(0);
+      const [state, dispatch] = useReducer(todoReducer, initialTodoState);
+      const {
+            todoList,
+            error,
+            filterError,
+            isTodoListLoading,
+            sortBy,
+            sortDirection,
+            filterTerm,
+            dataVersion,
+            } = state;
       const debouncedFilterTerm= useDebounce(filterTerm,300);
       const invalidateCache = useCallback(() =>
         {
