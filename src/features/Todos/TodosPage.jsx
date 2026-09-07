@@ -39,7 +39,8 @@ export default function TodosPage({token}){
 
       useEffect(() => { async function fetchTodos() 
         { try { 
-          setIsTodoListLoading(true); 
+        //   setIsTodoListLoading(true); 
+          dispatch({type: TODO_ACTIONS.FETCH_START})  
           const params = {
                 sortBy,
                 sortDirection,
@@ -54,14 +55,30 @@ export default function TodosPage({token}){
             if (!response.ok) { throw new Error('Something went wrong');   
             } 
             const data = await response.json(); 
-            setTodoList(data.tasks);
-            setFilterError(''); 
-            setError('');
+            dispatch({
+                      type:TODO_ACTIONS.FETCH_SUCCESS,
+                      payload: {
+                        todos: data.tasks}
+                    });
+            // setTodoList(data.tasks);
+            ///commenting out previous set state
+            // setFilterError(''); 
+            // setError('');
           } catch (error) {
                 if (debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'desc') {
-                    setFilterError(`Error filtering/sorting todos: ${error.message}`);
+                    dispatch({type: TODO_ACTIONS.FETCH_ERROR,
+                                payload : {
+                                    message: `Error filtering/sorting todos: ${error.message}`,
+                                    isFilterError: true
+                                }})
                 } else {
-                    setError(`Error fetching todos: ${error.message}`);
+                    // setError(`Error fetching todos: ${error.message}`);
+                    dispatch({type:TODO_ACTIONS.FETCH_ERROR,
+                              payload: {
+                                message:`Error fetching todos: ${error.message}`,
+                                isFilterError: false
+                              }
+                    })
                 }
         }finally { 
             setIsTodoListLoading(false); 
