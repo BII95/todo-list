@@ -29,12 +29,13 @@ export const initialTodoState = {
   filterError: '',
   isTodoListLoading: true,
   sortBy: 'createdAt',
-  sortDirection: 'asc',
+  sortDirection: 'desc',
   filterTerm: '',
   dataVersion: 0,
 };
 
 export function todoReducer(state,action){
+    console.log('Dispatched action:', action.type, action.payload);
     switch (action.type){
         case TODO_ACTIONS.FETCH_START:
             return {
@@ -74,10 +75,13 @@ export function todoReducer(state,action){
                 
             }
         case TODO_ACTIONS.ADD_TODO_ERROR:
-            return{...state, 
-                   todoList: state.todoList.filter(todo => todo.id !==action.payload.newTodo),
-                   error: action.payload.message,
-            }
+             return {
+                    ...state,
+                    todoList: state.todoList.filter(
+                        todo => todo.id !== action.payload.newTodoId
+                    ),
+                    error: action.payload.message,
+                    };
         case TODO_ACTIONS.COMPLETE_TODO_START:
             return{...state,
                    todoList: state.todoList.map(todo => 
@@ -98,34 +102,53 @@ export function todoReducer(state,action){
                     error:action.payload.message,  
             };
         case TODO_ACTIONS.UPDATE_TODO_START:
-            return{...state, 
-                todoList:state.todoList.map(todo =>
-                    todo.id === action.payload.editedTodo.id ? 
-                    action.payload.editedTodo : todo
-                ),
-                error: '',
-            }
-        case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
-            return{...state,
-                dataVersion: state.dataVersion+1,
-            }
-        case TODO_ACTIONS.UPDATE_TODO_ERROR:
-            return{
-                ...state, 
-                todoList: state.todoList.map(todo =>
-                    todo.id === action.payload.originalTodo.id?
-                    action.payload.originalTodo :todo
-                ),
-                error: action.payload.message,
-            }
+    return {
+        ...state,
+        todoList: state.todoList.map(todo =>
+            todo.id === action.payload.editedTodo.id
+                ? action.payload.editedTodo
+                : todo
+        ),
+        error: '',
+    };
+
+case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
+    return {
+        ...state,
+        dataVersion: state.dataVersion + 1,
+    };
+
+case TODO_ACTIONS.UPDATE_TODO_ERROR:
+    return {
+        ...state,
+        todoList: state.todoList.map(todo =>
+            todo.id === action.payload.id
+                ? action.payload.originalTodo
+                : todo
+        ),
+        error: action.payload.message,
+    };
         case TODO_ACTIONS.SET_SORT:
-            return{}
+            return {
+                ...state,
+                sortBy: action.payload.sortBy,
+                sortDirection: action.payload.sortDirection,
+            };
         case TODO_ACTIONS.SET_FILTER:
-            return{}
+            return {
+                ...state,
+                filterTerm: action.payload.filterTerm,
+            };
         case TODO_ACTIONS.CLEAR_ERROR:
-            return{}
+            return {
+                ...state,
+                error: '',
+            };
         case TODO_ACTIONS.CLEAR_FILTER_ERROR:
-            return{}
+            return {
+                ...state,
+                filterError: '',
+            };
         default:
             throw new Error(`Unknown action type: ${action.type}`);
     }
