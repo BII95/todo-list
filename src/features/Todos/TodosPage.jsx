@@ -7,13 +7,15 @@ import FilterInput from '../../shared/FilterInput';
 export default function TodosPage({token}){
       const [todoList,setTodoList]=useState([])
       const [error,setError]= useState('')
-      const[isTodoListLoading,setLoading]= useState(false)
-      const[sortBy,setSortBy]=useState('createdAt')
-      const[sortDirection,setSortDirection]=useState('desc')
-      const[filterTerm,setFilterTerm]=useState('');
-      const debouncedFilterTerm= useDebounce(filterTerm,300);
-      const [dataVersion,setDataVersion]=useState(0);
       const [filterError,setFilterError]=useState("")
+
+      const[isTodoListLoading,setIsTodoListLoading]= useState(true)
+      const[sortBy,setSortBy]=useState('createdAt')
+      const[sortDirection,setSortDirection]=useState('asc')
+      const[filterTerm,setFilterTerm]=useState('');
+      const [dataVersion,setDataVersion]=useState(0);
+      
+      const debouncedFilterTerm= useDebounce(filterTerm,300);
       const invalidateCache = useCallback(() =>
         {
             setDataVersion(prev => prev+1)
@@ -22,7 +24,7 @@ export default function TodosPage({token}){
 
       useEffect(() => { async function fetchTodos() 
         { try { 
-          setLoading(true); 
+          setIsTodoListLoading(true); 
           const params = {
                 sortBy,
                 sortDirection,
@@ -47,7 +49,7 @@ export default function TodosPage({token}){
                     setError(`Error fetching todos: ${error.message}`);
                 }
         }finally { 
-            setLoading(false); 
+            setIsTodoListLoading(false); 
           } } if (token) { 
                 fetchTodos();
             } }, [token,sortBy,sortDirection,debouncedFilterTerm]);

@@ -12,7 +12,7 @@ function TodoList({todoList,onCompleteTodo,onUpdateTodo,dataVersion}){
             todos:todoList.filter(todo => todo.isCompleted !== true) 
         }
     },[todoList,dataVersion])
-
+        
     return (
         filteredTodoList.todos.length === 0? (
             <p>Add todo above to get started</p>

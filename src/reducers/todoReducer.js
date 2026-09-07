@@ -10,3 +10,27 @@ export const TODO_ACTIONS = {
     ADD_TODO_ERROR: 'ADD_TODO_ERROR',
   // ... continue for all operations
 }
+export const initialTodoState = {
+  todoList: [],
+  error: '',
+  filterError: '',
+  isTodoListLoading: true,
+  sortBy: 'createdAt',
+  sortDirection: 'asc',
+  filterTerm: '',
+  dataVersion: 0,
+};
+
+export function todoReducer(state,action){
+    switch (action.type){
+        case TODO_ACTIONS.FETCH_START:
+            return {
+                ...state,
+                isTodoListLoading:true,
+                error: '',
+                filterError: '',
+            };
+        default:
+            throw new Error(`Unknown action type: ${action.type}`);
+    }
+}
