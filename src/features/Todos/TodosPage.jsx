@@ -202,19 +202,23 @@ export default function TodosPage({token}){
 }
         
        async function updateTodo(editedTodo) {
-    const originalTodo = todoList.find(
-        todo => todo.id === editedTodo.id
-    )
+        const originalTodo = todoList.find(
+            todo => todo.id === editedTodo.id
+        )
+        
+        dispatch({type:TODO_ACTIONS.UPDATE_TODO_START,
+                  payload:editedTodo
+        })
 
-    const updatedTodos2 = todoList.map(todo => {
-        if (todo.id === editedTodo.id) {
-            return { ...editedTodo }
-        } else {
-            return todo
-        }
-    })
+        // const updatedTodos2 = todoList.map(todo => {
+        //     if (todo.id === editedTodo.id) {
+        //         return { ...editedTodo }
+        //     } else {
+        //         return todo
+        //     }
+        // })
 
-    setTodoList(updatedTodos2)
+        // setTodoList(updatedTodos2)
 
     try {
         const response = await fetch(`/api/tasks/${editedTodo.id}`, {
@@ -237,14 +241,17 @@ export default function TodosPage({token}){
 
 
     } catch (error) {
-        setTodoList(previous =>
-            previous.map(todo =>
-                todo.id === editedTodo.id ? originalTodo : todo
-            )
-        )
+        dispatch({...state,
+                    payload:originalTodo,
+                    message:`Error: ${error.message}`
+        })
+        // setTodoList(previous =>
+        //     previous.map(todo =>
+        //         todo.id === editedTodo.id ? originalTodo : todo)
+        // )
         
 
-        setError(`Error: ${error.message}`)
+        // setError()
     }
 }
 
