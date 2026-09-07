@@ -38,24 +38,26 @@ export default function TodosPage({token}){
         },[]);  
 
       useEffect(() => { async function fetchTodos() 
-        { try { 
-        //   setIsTodoListLoading(true); 
-          dispatch({type: TODO_ACTIONS.FETCH_START})  
-          const params = {
-                sortBy,
-                sortDirection,
-                limit: 100 }; 
-          if(debouncedFilterTerm){
-            params.find = debouncedFilterTerm;
-          }
-          const parameters = new URLSearchParams(params)
-          const response = await fetch(`/api/tasks?${parameters}`, 
-            { headers: { 'X-CSRF-TOKEN': token }, credentials: 'include' }); 
-            if (response.status === 401) { throw new Error('Unauthorized'); } 
-            if (!response.ok) { throw new Error('Something went wrong');   
-            } 
+        { 
+            const params = {
+                        sortBy,
+                        sortDirection,
+                        limit: 100 }; 
+                if(debouncedFilterTerm){
+                    params.find = debouncedFilterTerm;
+                }
+            const parameters = new URLSearchParams(params)
+            const response = await fetch(`/api/tasks?${parameters}`, 
+                { headers: { 'X-CSRF-TOKEN': token }, credentials: 'include' }); 
+                if (response.status === 401) { throw new Error('Unauthorized'); } 
+                if (!response.ok) { throw new Error('Something went wrong');   
+                } 
             const data = await response.json(); 
-            dispatch({
+            try { 
+        //   setIsTodoListLoading(true); 
+              dispatch({type: TODO_ACTIONS.FETCH_START})  
+  
+              dispatch({
                       type:TODO_ACTIONS.FETCH_SUCCESS,
                       payload: {
                         todos: data.tasks}
@@ -81,7 +83,11 @@ export default function TodosPage({token}){
                     })
                 }
         }finally { 
-            setIsTodoListLoading(false); 
+            dispatch({type:TODO_ACTIONS.FETCH_SUCCESS,
+                      payload:{
+                        todos: data.tasks}
+            })
+            // setIsTodoListLoading(false); 
           } } if (token) { 
                 fetchTodos();
             } }, [token,sortBy,sortDirection,debouncedFilterTerm]);
@@ -94,7 +100,11 @@ export default function TodosPage({token}){
               isCompleted: false
           }
 
-          setTodoList(previous => [newTodo, ...previous])
+        //   dispatch({type:TODO_ACTIONS.ADD_TODO_START,
+        //             payload:{newTodo}
+        //   })
+          //check this dispatch later
+        //   setTodoList(previous => [newTodo, ...previous])
 
           try {
               const response = await fetch('/api/tasks', {
@@ -115,33 +125,45 @@ export default function TodosPage({token}){
               }
 
               const savedTodo = await response.json()
+              
+              dispatch({type:TODO_ACTIONS.ADD_TODO_START,
+                        payload:{
+                            newTodo
+                        }
 
-              setTodoList(previous =>
-                  previous.map(todo =>
-                      todo.id === newTodo.id ? savedTodo : todo
-                  )
-              );
+              })
+
+              dispatch({type:TODO_ACTIONS.ADD_TODO_SUCCESS,
+                        payload:savedTodo
+              })
+
+            //   setTodoList(previous =>
+            //       previous.map(todo =>
+            //           todo.id === newTodo.id ? savedTodo : todo
+            //       )
+            //   );
+
               invalidateCache();
           } catch (error) {
-              setTodoList(previous =>
-                  previous.filter(todo => todo.id !== newTodo.id)
-              )
-
-              setError(`Error: ${error.message}`)
+            //   setTodoList(previous =>
+            //       previous.filter(todo => todo.id !== newTodo.id)
+            //   )
+              dispatch({type:TODO_ACTIONS.ADD_TODO_ERROR,
+                        message:`Error: ${error.message}`,})  
           }
       }
       async function completeTodo(id) {
-    const originalTodo = todoList.find(todo => todo.id === id)
+        const originalTodo = todoList.find(todo => todo.id === id)
 
-    const updatedTodos = todoList.map(todo => {
-        if (todo.id === id) {
-            return { ...todo, isCompleted: true }
-        } else {
-            return todo
-        }
-    })
+        const updatedTodos = todoList.map(todo => {
+            if (todo.id === id) {
+                return { ...todo, isCompleted: true }
+            } else {
+                return todo
+            }
+        })
 
-    setTodoList(updatedTodos)
+        setTodoList(updatedTodos)
 
     try {
         const response = await fetch(`/api/tasks/${id}`, {

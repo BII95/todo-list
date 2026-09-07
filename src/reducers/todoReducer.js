@@ -57,17 +57,39 @@ export function todoReducer(state,action){
             }
             
         case TODO_ACTIONS.ADD_TODO_START:
-            return{}
+            return{...state,
+                todoList:[action.payload.newTodo,...state.todoList],
+                error:'',
+            }
         case TODO_ACTIONS.ADD_TODO_SUCCESS:
-            return{}
+            return{...state,
+                todoList: state.todoList.map(todo =>
+                    todo.id === action.payload.newTodoId 
+                    ? action.payload.savedTodo : todo
+                ),
+                error:'',
+                dataVersion:state.dataVersion +1,
+                
+            }
         case TODO_ACTIONS.ADD_TODO_ERROR:
-            return{}
+            return{...state, 
+                   todoList: state.todoList.filter(todo => todo.id !==action.payload.newTodo),
+                   error: action.payload.message,
+            }
         case TODO_ACTIONS.COMPLETE_TODO_START:
             return{}
 
         case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
             return{}
         case TODO_ACTIONS.COMPLETE_TODO_ERROR:
+            return{}
+        case TODO_ACTIONS.SET_SORT:
+            return{}
+        case TODO_ACTIONS.SET_FILTER:
+            return{}
+        case TODO_ACTIONS.CLEAR_ERROR:
+            return{}
+        case TODO_ACTIONS.CLEAR_FILTER_ERROR:
             return{}
         default:
             throw new Error(`Unknown action type: ${action.type}`);
