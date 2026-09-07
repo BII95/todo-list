@@ -154,16 +154,19 @@ export default function TodosPage({token}){
       }
       async function completeTodo(id) {
         const originalTodo = todoList.find(todo => todo.id === id)
-
-        const updatedTodos = todoList.map(todo => {
-            if (todo.id === id) {
-                return { ...todo, isCompleted: true }
-            } else {
-                return todo
-            }
+        ///
+        dispatch({type:TODO_ACTIONS.COMPLETE_TODO_START,
+            payload:id
         })
 
-        setTodoList(updatedTodos)
+        // const updatedTodos = todoList.map(todo => {
+        //     if (todo.id === id) {
+        //         return { ...todo, isCompleted: true }
+        //     } else {
+        //         return todo
+        //     }
+        // })
+        // setTodoList(updatedTodos)
 
     try {
         const response = await fetch(`/api/tasks/${id}`, {
@@ -182,14 +185,19 @@ export default function TodosPage({token}){
             throw new Error('Failed to complete todo')
         }
         invalidateCache();
+        dispatch({type:TODO_ACTIONS.COMPLETE_TODO_SUCCESS})
 
     } catch (error) {
-        setTodoList(previous =>
-            previous.map(todo =>
-                todo.id === id ? originalTodo : todo
-            )
-        )
-        setError(`Error: ${error.message}`)
+        dispatch({type:TODO_ACTIONS.COMPLETE_TODO_ERROR,
+                  payload: originalTodo,
+                  message: `Error: ${error.message}`
+        })
+        // setTodoList(previous =>
+        //     previous.map(todo =>
+        //         todo.id === id ? originalTodo : todo
+        //     )
+        // )
+        // setError(`Error: ${error.message}`)
     }
 }
         
