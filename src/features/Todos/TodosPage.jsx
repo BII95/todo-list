@@ -10,15 +10,6 @@ import {
     TODO_ACTIONS,
 } from '../../reducers/todoReducer';
 export default function TodosPage({token}){
-    //   const [todoList,setTodoList]=useState([])
-    //   const [error,setError]= useState('')
-    //   const [filterError,setFilterError]=useState("")
-
-    //   const[isTodoListLoading,setIsTodoListLoading]= useState(true)
-    //   const[sortBy,setSortBy]=useState('createdAt')
-    //   const[sortDirection,setSortDirection]=useState('asc')
-    //   const[filterTerm,setFilterTerm]=useState('');
-    //   const [dataVersion,setDataVersion]=useState(0);
       const [state, dispatch] = useReducer(todoReducer, initialTodoState);
       const {
             todoList,
@@ -31,11 +22,6 @@ export default function TodosPage({token}){
             dataVersion,
             } = state;
       const debouncedFilterTerm= useDebounce(filterTerm,300);
-    //   const invalidateCache = useCallback(() =>
-    //     {
-    //         setDataVersion(prev => prev+1)
-    //         console.log("invalidating memo cache after todo mutation")    
-    //     },[]);  
 
       useEffect(() => { async function fetchTodos() 
         { 
@@ -71,7 +57,6 @@ export default function TodosPage({token}){
                                     isFilterError: true
                                 }})
                 } else {
-                    // setError(`Error fetching todos: ${error.message}`);
                     dispatch({type:TODO_ACTIONS.FETCH_ERROR,
                               payload: {
                                 message:`Error fetching todos: ${error.message}`,
