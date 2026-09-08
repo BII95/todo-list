@@ -1,6 +1,9 @@
 import { useState } from "react";
-// import TextInputWithLabel from "../shared/TextInputWithLabel";
-export default function Logon ({onSetEmail,onSetToken}){
+import { useAuth } from "../contexts/AuthContext";
+
+
+export default function Logon (){
+    const {login} = useAuth();
     const [email,setEmail]=useState('')
     const [password, setPassword] = useState('')
     const [authError,setAuthError]=useState('')
@@ -8,27 +11,34 @@ export default function Logon ({onSetEmail,onSetToken}){
     async function handleSubmit(event) {
          event.preventDefault();
 
-        try{ 
+        // try{ 
             setIsLoggingOn(true)
-            const response = await fetch('/api/users/logon', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ email, password })
-            });
-            const data = await response.json();
-            if (response.status === 200 && data.name && data.csrfToken) {
-                onSetEmail(data.name);
-                onSetToken(data.csrfToken);
+            const result = await login(email, password);
+            if (!result.success) {
+               setAuthError(result.error);
+            }
 
-            } else {
-                setAuthError(`Authentication failed: ${data?.message}`);
-            }
-            } catch (error) {
-            setAuthError(`Error: ${error.name} | ${error.message}`);
-            } finally {
-                setIsLoggingOn(false);
-            }
+            setIsLoggingOn(false);
+            
+            // const response = await fetch('/api/users/logon', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     credentials: 'include',
+            //     body: JSON.stringify({ email, password })
+            // });
+            // const data = await response.json();
+            // if (response.status === 200 && data.name && data.csrfToken) {
+            //     onSetEmail(data.name);
+            //     onSetToken(data.csrfToken);
+
+            // } else {
+            //     setAuthError(`Authentication failed: ${data?.message}`);
+            // }
+            // } catch (error) {
+            // setAuthError(`Error: ${error.name} | ${error.message}`);
+            // } finally {
+            //     setIsLoggingOn(false);
+            // }
     }
     return (
         <form onSubmit={handleSubmit}>

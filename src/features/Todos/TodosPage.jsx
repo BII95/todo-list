@@ -1,4 +1,4 @@
-import { useEffect,useReducer } from 'react';
+import {useEffect,useReducer } from 'react';
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
@@ -9,7 +9,10 @@ import {
     initialTodoState,
     TODO_ACTIONS,
 } from '../../reducers/todoReducer';
-export default function TodosPage({token}){
+
+import { useAuth } from '../../contexts/AuthContext';
+export default function TodosPage(){
+      const { token } = useAuth();
       const [state, dispatch] = useReducer(todoReducer, initialTodoState);
       const {
             todoList,
