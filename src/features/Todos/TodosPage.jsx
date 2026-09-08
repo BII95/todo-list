@@ -127,8 +127,8 @@ export default function TodosPage(){
               const savedTodo = await response.json()
               
               dispatch({type:TODO_ACTIONS.ADD_TODO_SUCCESS,
-                        payload:newTodo.id
-                        ,savedTodo
+                        payload:{newTodoID:newTodo.id
+                                ,savedTodo}
               })
 
           } catch (error) {
