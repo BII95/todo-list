@@ -38,9 +38,10 @@ export default function TodosPage({token}){
             try {   
               const response = await fetch(`/api/tasks?${parameters}`, 
                 { headers: { 'X-CSRF-TOKEN': token }, credentials: 'include' }); 
-                if (response.status === 401) { throw new Error('Unauthorized'); } 
-                if (!response.ok) { throw new Error('Something went wrong');   
-                }   
+                if (!response.ok) { throw new Error(
+                    response.status === 401 ? 'Unauthorized' : response.status === 404
+                    ? 'Not Found'
+                    : `Request failed with status ${response.status}`)}   
               const data = await response.json(); 
 
               dispatch({
@@ -132,7 +133,7 @@ export default function TodosPage({token}){
                         type:TODO_ACTIONS.ADD_TODO_ERROR,
                         payload:{
                             newTodoId: newTodo.id,
-                            message:`Error: ${error.message}`
+                            message:`Error adding todo: ${todoTitle}|Error message: ${error.message}`
                         }})}
       }
       async function completeTodo(id) {
@@ -166,7 +167,7 @@ export default function TodosPage({token}){
                 payload: {
                     id,
                     originalTodo,
-                    message: `Error: ${error.message}`}});
+                    message: `Error completing todo: ${originalTodo?.title ?? id} | Error message: ${error.message}`}});
     }
 }
         
