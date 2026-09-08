@@ -29,7 +29,7 @@ export const initialTodoState = {
   filterError: '',
   isTodoListLoading: true,
   sortBy: 'createdAt',
-  sortDirection: 'desc',
+  sortDirection: 'asc',
   filterTerm: '',
   dataVersion: 0,
 };
