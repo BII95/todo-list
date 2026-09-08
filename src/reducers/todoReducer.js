@@ -19,6 +19,7 @@ export const TODO_ACTIONS = {
 //set sort    
     SET_SORT: 'SET_SORT',
     SET_FILTER: 'SET_FILTER',
+    RESET_FILTERS: 'RESET_FILTERS',
  //error clearing   
     CLEAR_ERROR:  'CLEAR_ERROR',
     CLEAR_FILTER_ERROR: 'CLEAR_FILTER_ERROR'
@@ -29,7 +30,7 @@ export const initialTodoState = {
   filterError: '',
   isTodoListLoading: true,
   sortBy: 'createdAt',
-  sortDirection: 'desc',
+  sortDirection: 'asc',
   filterTerm: '',
   dataVersion: 0,
 };
@@ -139,6 +140,14 @@ case TODO_ACTIONS.UPDATE_TODO_ERROR:
                 ...state,
                 filterTerm: action.payload.filterTerm,
             };
+        case TODO_ACTIONS.RESET_FILTERS:
+              return {
+                    ...state,
+                    filterTerm: '',
+                    sortBy: 'createdAt',
+                    sortDirection: 'asc',
+                    filterError: '',
+                     };
         case TODO_ACTIONS.CLEAR_ERROR:
             return {
                 ...state,

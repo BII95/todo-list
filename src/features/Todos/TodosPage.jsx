@@ -54,7 +54,7 @@ export default function TodosPage(){
                     });
     
           } catch (error) {
-                if (debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'desc') {
+                if (debouncedFilterTerm || sortBy !== 'createdAt' || sortDirection !== 'asc') {
                     dispatch({type: TODO_ACTIONS.FETCH_ERROR,
                                 payload : {
                                     message: `Error filtering/sorting todos: ${error.message}`,
@@ -239,28 +239,8 @@ export default function TodosPage(){
                   Clear Filter Error
                 </button>
                 
-                <button onClick={()=>{
-                    dispatch({
-                            type: TODO_ACTIONS.SET_FILTER,
-                            payload: { filterTerm: '' }
-                        });
+                <button onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}>
 
-                    dispatch({
-                        type: TODO_ACTIONS.SET_SORT,
-                        payload: { sortBy: 'createdAt', 
-                                   sortDirection:'desc'                            
-                        }
-                    });
-
-                   
-                    
-                    dispatch({
-                         type: TODO_ACTIONS.CLEAR_FILTER_ERROR
-                    });
-
-
-
-                }}>
                   Reset Filters
                 
                 </button>
