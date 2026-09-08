@@ -10,7 +10,7 @@ export default function Logon (){
     const [isLoggingOn,setIsLoggingOn]=useState(false)
     async function handleSubmit(event) {
          event.preventDefault();
-
+        setAuthError(''),
         // try{ 
             setIsLoggingOn(true)
             const result = await login(email, password);
