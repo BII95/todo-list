@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 
-function LoginPage() {
+export default function LoginPage() {
     const { login, isAuthenticated } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
@@ -58,6 +58,4 @@ function LoginPage() {
         </form>
     )
     
-  
-  // ... rest of component with form JSX
-}
+  }
