@@ -10,11 +10,13 @@ export default function Logoff() {
     async function handleLogoff() {
         setIsLoggingOff(true);
         const result = await logout();
-        if (!result.success) {
-            setLogoffError(result.error);
-            setIsLoggingOff(false)
+        if (result.success) {
+            navigate('/login')
+        }else{
+            setLogoffError(result.error);            
         }
-        navigate('/login')
+        setIsLoggingOff(false)
+
     }
 
     return (

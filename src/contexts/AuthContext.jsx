@@ -33,7 +33,7 @@ export function AuthProvider({ children }) {
     
     if (res.status === 200 && data.name && data.csrfToken) {
       // Success: Update state
-      setEmail(data.name);
+      setEmail(data.email);
       setToken(data.csrfToken);
       return { success: true };
     } else {
