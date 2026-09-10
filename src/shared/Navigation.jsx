@@ -14,10 +14,7 @@ export default function Navigation(){
         return{
             fontWeight: isActive ? "bold" : "normal"
         }
-    }
-
-     
-    
+    }    
 
     return(
         <nav>
