@@ -33,7 +33,7 @@ export default function TodoListItem({todo,onCompleteTodo,onUpdateTodo,elementId
                     <TextInputWithLabel
                         value = {workingTitle}
                         onChange={handleEdit}  
-                        labelText="Todo"
+                        // labelText="Todo"
                         elementId={elementId}
                         
                     />

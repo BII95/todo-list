@@ -3,48 +3,59 @@ import { useAuth } from "../contexts/AuthContext"
 
 export default function ProfilePage() {
     const{email,token}=useAuth();
-    const[todos,setTodos]=useState([]);
+    const[todoStats,setTodoStats]=useState([]);
     const[isLoading,setIsLoading]= useState(true);
     const [error,setError] = useState("")
 
     useEffect(() => {
-        async function fetchTodos() {
+        async function fetchTodoStats() {
+            
+            if(!token) return;
             try {
                 setIsLoading(true);
-
+                setError('')
                 const response = await fetch("/api/tasks?limit=100", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                if (response.status === 401){
+                    throw new Error ("Unauthorized")
+                }
 
                 if (!response.ok) {
                     throw new Error("Failed to fetch todos");
                 }
 
                 const data = await response.json();
-                setTodos(data.tasks);
+                const todos=data.tasks;
+                const completedTodos =todos.filter( todo => todo.isCompleted ).length; 
+                const activeTodos = todos.filter( todo => !todo.isCompleted ).length;
+                const totalTodos =todos.length    
+                setTodoStats({totalTodos,completedTodos,activeTodos})
+
             } catch (error) {
-                setError(error.message);
+                setError(`Error loading stats: ${error.message}`);
             } finally {
                 setIsLoading(false);
             }
         }
-        fetchTodos();
+        fetchTodoStats();
 
     }, [token]);
-    console.log(todos)
-    const completedTodos =todos.filter( todo => todo.isCompleted ).length; 
-    const activeTodos = todos.filter( todo => !todo.isCompleted ).length;
+   
     if (isLoading){
         return <p>Loading...</p>
     }
     return(
-            <div> 
-                <h1>Profile</h1> 
-                <p>Email: {email}</p> <h2>Todo Statistics</h2>
+            <div>   
                 {error && <p>{error}</p>}
-                <p>Completed: {completedTodos}</p> 
-                <p>Active: {activeTodos}</p> 
+                <h1>Profile</h1> 
+                <p>Email: {email}</p> 
+                <h2>Todo Statistics</h2>
+              
+                <p>Total Todos: {todoStats.totalTodos}</p>
+                <p>Completed: {todoStats.completedTodos}</p> 
+                <p>Active: {todoStats.activeTodos}</p> 
             </div> );    
 }
