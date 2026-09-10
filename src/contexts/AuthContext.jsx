@@ -17,6 +17,7 @@ export function AuthProvider({ children }) {
   // State for authentication
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
+  const [name, setName] = useState('');
   
   
   // Functions will go here...
@@ -36,6 +37,7 @@ export function AuthProvider({ children }) {
       // Success: Update state
       setEmail(data.email);
       setToken(data.csrfToken);
+      setName(data.name)
       return { success: true };
     } else {
       // Failure: Return error
@@ -98,6 +100,7 @@ export function AuthProvider({ children }) {
     isAuthenticated: !!token,
     login,
     logout,
+    name,
   };
   
   return (
