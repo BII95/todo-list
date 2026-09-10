@@ -28,11 +28,10 @@ export default function LoginPage() {
         try {
             const result = await login(email, password);
 
-            if (result.success) {
-                navigate(from, { replace: true });
-            } else {
+            if (!result.success) {
                 setAuthError(result.error);
-            }
+            } 
+
         } catch (error) {
             setAuthError(error.message);
         } finally {
