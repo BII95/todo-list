@@ -28,7 +28,7 @@ export default function TodosPage(){
             } = state;
       const debouncedFilterTerm= useDebounce(filterTerm,300);
       const[searchParams]=useSearchParams();
-      const statusFilter = searchParams.get('status') || 'all';  // Add this line
+      const statusFilter =  searchParams.get('status')|| 'all';
 
       useEffect(() => { async function fetchTodos() 
         { 
@@ -76,7 +76,7 @@ export default function TodosPage(){
         
         if (token) { 
                 fetchTodos();
-            } }, [token,sortBy,sortDirection,debouncedFilterTerm]);
+            } }, [token,sortBy,sortDirection,debouncedFilterTerm,statusFilter]);
         const handleFilterChange = (newTerm) => { 
             dispatch({
                 type:TODO_ACTIONS.SET_FILTER,
