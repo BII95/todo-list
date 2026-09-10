@@ -11,7 +11,9 @@ export default function RequireAuth ({children}){
     if (!isAuthenticated) {
       navigate("/login", 
         {replace: true ,
-        state:{from: location}
+        state:{
+          from: location,
+        },
     });
     }
   }, [isAuthenticated, navigate, location]);

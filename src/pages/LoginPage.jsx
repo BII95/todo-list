@@ -25,12 +25,21 @@ export default function LoginPage() {
             event.preventDefault();
             setAuthError('')
             setIsLoggingOn(true)
+        try {
             const result = await login(email, password);
-            if (!result.success) {         
+
+            if (result.success) {
+                navigate(from, { replace: true });
+            } else {
                 setAuthError(result.error);
-            } 
+            }
+        } catch (error) {
+            setAuthError(error.message);
+        } finally {
             setIsLoggingOn(false);
-            }    
+        }
+    }
+
     return(
         <form onSubmit={handleSubmit}>
             {authError && <p>{authError}</p>}
