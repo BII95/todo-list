@@ -30,7 +30,7 @@ export default function ProfilePage() {
 
                 const data = await response.json();
                 const todos=data.tasks;
-                console.log(todos)
+                // console.log(todos)
                 const completedTodos =todos.filter( todo => todo.isCompleted ).length; 
                 const totalTodos =todos.length  
                 const activeTodos = totalTodos-completedTodos
