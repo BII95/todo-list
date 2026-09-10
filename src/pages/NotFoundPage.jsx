@@ -9,7 +9,7 @@ export default function NotFoundPage(){
                         <li>
                                 <Link to= "/">Go Home</Link></li>
                         <li>
-                                <Link to= "/Login">Back to login</Link>
+                                <Link to= "/login">Back to login</Link>
 
                         </li>
                         <li>
