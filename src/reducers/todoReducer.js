@@ -30,13 +30,12 @@ export const initialTodoState = {
   filterError: '',
   isTodoListLoading: true,
   sortBy: 'createdAt',
-  sortDirection: 'asc',
+  sortDirection: 'desc',
   filterTerm: '',
   dataVersion: 0,
 };
 
 export function todoReducer(state,action){
-    // console.log('Dispatched action:', action.type, action.payload);
     switch (action.type){
         case TODO_ACTIONS.FETCH_START:
             return {
@@ -143,10 +142,10 @@ case TODO_ACTIONS.UPDATE_TODO_ERROR:
         case TODO_ACTIONS.RESET_FILTERS:
               return {
                     ...state,
-                    filterTerm: '',
-                    sortBy: 'createdAt',
-                    sortDirection: 'asc',
-                    filterError: '',
+                    filterTerm: initialTodoState.filterTerm,
+                    sortBy: initialTodoState.sortBy,
+                    sortDirection: initialTodoState.sortDirection,
+                    filterError: initialTodoState.filterError,
                      };
         case TODO_ACTIONS.CLEAR_ERROR:
             return {
