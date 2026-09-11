@@ -17,6 +17,8 @@ export function AuthProvider({ children }) {
   // State for authentication
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
+  const [name, setName] = useState('');
+  
   
   // Functions will go here...
   const login = async (userEmail, password) => {
@@ -33,8 +35,9 @@ export function AuthProvider({ children }) {
     
     if (res.status === 200 && data.name && data.csrfToken) {
       // Success: Update state
-      setEmail(data.name);
+      setEmail(data.email);
       setToken(data.csrfToken);
+      setName(data.name)
       return { success: true };
     } else {
       // Failure: Return error
@@ -97,6 +100,7 @@ export function AuthProvider({ children }) {
     isAuthenticated: !!token,
     login,
     logout,
+    name,
   };
   
   return (

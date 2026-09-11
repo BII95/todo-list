@@ -1,16 +1,18 @@
 import {useEffect,useReducer } from 'react';
-import TodoList from './TodoList/TodoList';
-import TodoForm from './TodoForm';
-import SortBy from '../../shared/SortBy';
-import useDebounce from '../../utils/useDebounce';
-import FilterInput from '../../shared/FilterInput';
+import TodoList from '../features/Todos/TodoList/TodoList';
+import TodoForm from '../features/Todos/TodoForm';
+import SortBy from '../shared/SortBy';
+import useDebounce from '../utils/useDebounce';
+import FilterInput from '../shared/FilterInput';
 import {
     todoReducer,
     initialTodoState,
     TODO_ACTIONS,
-} from '../../reducers/todoReducer';
+} from '../reducers/todoReducer';
+import { useAuth } from '../contexts/AuthContext';
+import { useSearchParams } from 'react-router';
+import StatusFilter from '../shared/StatusFilter';
 
-import { useAuth } from '../../contexts/AuthContext';
 export default function TodosPage(){
       const { token } = useAuth();
       const [state, dispatch] = useReducer(todoReducer, initialTodoState);
@@ -25,6 +27,8 @@ export default function TodosPage(){
             dataVersion,
             } = state;
       const debouncedFilterTerm= useDebounce(filterTerm,300);
+      const[searchParams]=useSearchParams();
+      const statusFilter =  searchParams.get('status')|| 'all';
 
       useEffect(() => { async function fetchTodos() 
         { 
@@ -72,7 +76,7 @@ export default function TodosPage(){
         
         if (token) { 
                 fetchTodos();
-            } }, [token,sortBy,sortDirection,debouncedFilterTerm]);
+            } }, [token,sortBy,sortDirection,debouncedFilterTerm,statusFilter]);
         const handleFilterChange = (newTerm) => { 
             dispatch({
                 type:TODO_ACTIONS.SET_FILTER,
@@ -256,6 +260,7 @@ export default function TodosPage(){
                     sortDirection={sortDirection}
         
                 />
+            <StatusFilter></StatusFilter>
             <FilterInput
                 filterTerm={filterTerm}
                 onFilterChange={handleFilterChange}/>
@@ -266,6 +271,7 @@ export default function TodosPage(){
                 todoList={todoList}
                 onUpdateTodo={updateTodo}
                 dataVersion={dataVersion}
+                statusFilter={statusFilter}
                 />
             
         </div>

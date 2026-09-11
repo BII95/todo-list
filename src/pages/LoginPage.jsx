@@ -1,25 +1,45 @@
-import { useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router';
+import { useAuth } from '../contexts/AuthContext';
 
-
-export default function Logon (){
-    const {login} = useAuth();
+export default function LoginPage() {
+    const { login, isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
     const [email,setEmail]=useState('')
     const [password, setPassword] = useState('')
     const [authError,setAuthError]=useState('')
     const [isLoggingOn,setIsLoggingOn]=useState(false)
-    async function handleSubmit(event) {
+  // Get intended destination from location state, default to /todos
+  const from = location.state?.from?.pathname || '/todos';
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, navigate, from]);
+
+  // Handle login form submission
+  async function handleSubmit(event) {
             event.preventDefault();
             setAuthError('')
             setIsLoggingOn(true)
+        try {
             const result = await login(email, password);
+
             if (!result.success) {
-               setAuthError(result.error);
-            }
+                setAuthError(result.error);
+            } 
+
+        } catch (error) {
+            setAuthError(error.message);
+        } finally {
             setIsLoggingOn(false);
-            
+        }
     }
-    return (
+
+    return(
         <form onSubmit={handleSubmit}>
             {authError && <p>{authError}</p>}
             <label htmlFor="email">Email</label>
@@ -45,4 +65,5 @@ export default function Logon (){
             </button>
         </form>
     )
-}
+    
+  }
