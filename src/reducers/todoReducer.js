@@ -30,7 +30,7 @@ export const initialTodoState = {
   filterError: '',
   isTodoListLoading: true,
   sortBy: 'createdAt',
-  sortDirection: 'asc',
+  sortDirection: 'desc',
   filterTerm: '',
   dataVersion: 0,
 };
@@ -142,10 +142,10 @@ case TODO_ACTIONS.UPDATE_TODO_ERROR:
         case TODO_ACTIONS.RESET_FILTERS:
               return {
                     ...state,
-                    filterTerm: '',
-                    sortBy: 'createdAt',
-                    sortDirection: 'asc',
-                    filterError: '',
+                    filterTerm: initialTodoState.filterTerm,
+                    sortBy: initialTodoState.sortBy,
+                    sortDirection: initialTodoState.sortDirection,
+                    filterError: initialTodoState.filterError,
                      };
         case TODO_ACTIONS.CLEAR_ERROR:
             return {
