@@ -1,0 +1,77 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  padding: 20px 24px;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.todo:hover {
+  border-color: #3a4655;
+  background-color: #1d2129;
+}
+
+.todoContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.todoTitle {
+  color: var(--text-primary);
+  font-size: 17px;
+  margin: 0;
+}
+
+.completed .todoTitle {
+  color: var(--text-secondary);
+  text-decoration: line-through;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.actionButton {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.actionButton:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+}
+
+.deleteButton:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
