@@ -1,0 +1,32 @@
+.header {
+  height: 74px;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg-primary);
+
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  width: min(1080px, 90%);
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 12px 18px;
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+}
+
+.active {
+  color: var(--accent);
+  background-color: var(--bg-card);
+  border-radius: 5px;
+}
