@@ -12,6 +12,7 @@ import {
 import { useAuth } from '../contexts/AuthContext';
 import { useSearchParams } from 'react-router';
 import StatusFilter from '../shared/StatusFilter';
+import styles from '../styles/TodosPage.module.css'
 
 export default function TodosPage() {
   const { token } = useAuth();
@@ -240,7 +241,23 @@ export default function TodosPage() {
   }
 
   return (
+  <>
+    <div className={styles.page}>
+      <main className={styles.container}>
+
+        <section className={styles.heading}>
+          <div>
+            <p className={styles.date}>TODAY · SUNDAY, SEP 13</p>
+            <h1>Your Tasks, user </h1>
+          </div>
+
+          <div className={styles.remaining}>
+            <strong>#of todos left</strong>
+            <span>REMAINING</span>
+          </div>
+        </section>
     <div>
+      
       {error && (
         <div>
           <p>{error}</p>
@@ -289,5 +306,8 @@ export default function TodosPage() {
         statusFilter={statusFilter}
       />
     </div>
+    </main>
+    </div>
+    </>
   );
 }

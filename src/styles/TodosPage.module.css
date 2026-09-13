@@ -1,0 +1,44 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.container {
+  width: min(1080px, 90%);
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 50px;
+}
+
+.heading h1 {
+  margin: 10px 0 0;
+  font-size: 42px;
+}
+
+.date {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.remaining {
+  text-align: center;
+}
+
+.remaining strong {
+  display: block;
+  color: var(--accent);
+  font-size: 48px;
+}
+
+.remaining span {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
