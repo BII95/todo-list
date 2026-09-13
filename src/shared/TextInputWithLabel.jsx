@@ -4,6 +4,7 @@ export default function TextInputWithLabel({
   onChange,
   ref,
   value,
+  className,
 }) {
   return (
     <>
@@ -14,6 +15,7 @@ export default function TextInputWithLabel({
         ref={ref}
         value={value}
         onChange={onChange}
+        className={className}
       />
     </>
   );
