@@ -16,15 +16,15 @@ function StatusFilter() {
 
   return (
     <div>
-      <label htmlFor='statusFilter'>Show:</label>
+      <label htmlFor="statusFilter">Show:</label>
       <select
-        id='statusFilter'
+        id="statusFilter"
         value={currentStatus}
         onChange={(e) => handleStatusChange(e.target.value)}
       >
-        <option value='all'>All Todos</option>
-        <option value='active'>Active Todos</option>
-        <option value='completed'>Completed Todos</option>
+        <option value="all">All Todos</option>
+        <option value="active">Active Todos</option>
+        <option value="completed">Completed Todos</option>
       </select>
     </div>
   );
