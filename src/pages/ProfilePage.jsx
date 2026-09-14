@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import styles from '../styles/ProfilePage.module.css';
 
 export default function ProfilePage() {
   const { email, name, token } = useAuth();
@@ -62,30 +63,95 @@ export default function ProfilePage() {
   }, [token]);
 
   return (
-    <div>
-      <h1>Profile</h1>
-      <section>
-        <h2>Account Information</h2>
-        <p>Name:{name}</p>
-        <p>Email: {email}</p>
-        <p>
-          Status: {todoStats.totalTodos > 0 ? 'Active user' : 'No tasks yet'}
-        </p>
-      </section>
+    <div className={styles.page}>
+      <main className={styles.container}>
+        <section className={styles.hero}>
+          <p className={styles.eyebrow}>ACCOUNT</p>
+          <h1 className={styles.heading}>
+            {name}'s <span className={styles.accentText}>profile.</span>
+          </h1>
+          <p className={styles.subtext}>{email}</p>
+        </section>
 
-      <section>
-        <h2>Todo Statistics</h2>
-        {isLoading && <p>Loading statistics...</p>}
-        {!isLoading && error && <p role="alert">{error}</p>}
-        {!isLoading && !error && (
-          <>
-            <p>Total Todos: {todoStats.totalTodos}</p>
-            <p>Completed: {todoStats.completedTodos}</p>
-            <p>Active: {todoStats.activeTodos}</p>
-            <p>Completion Rate: {todoStats.completionPercent}%</p>
-          </>
-        )}
-      </section>
+        <div className={styles.cardGrid}>
+          <section className={styles.card}>
+            <h2 className={styles.cardHeading}>Account Information</h2>
+            <dl className={styles.infoList}>
+              <div className={styles.infoRow}>
+                <dt>Name</dt>
+                <dd>{name}</dd>
+              </div>
+              <div className={styles.infoRow}>
+                <dt>Email</dt>
+                <dd>{email}</dd>
+              </div>
+              <div className={styles.infoRow}>
+                <dt>Status</dt>
+                <dd>
+                  {todoStats.totalTodos > 0 ? 'Active user' : 'No tasks yet'}
+                </dd>
+              </div>
+            </dl>
+          </section>
+
+          <section className={styles.card}>
+            <h2 className={styles.cardHeading}>Todo Statistics</h2>
+
+            {isLoading && (
+              <p className={styles.status}>Loading statistics...</p>
+            )}
+            {!isLoading && error && (
+              <p className={styles.error} role="alert">
+                {error}
+              </p>
+            )}
+
+            {!isLoading && !error && (
+              <>
+                <div className={styles.progressHeader}>
+                  <span className={styles.progressLabel}>Completion rate</span>
+                  <span className={styles.progressPercent}>
+                    {todoStats.completionPercent}%
+                  </span>
+                </div>
+                <div
+                  className={styles.progressTrack}
+                  role="progressbar"
+                  aria-valuenow={todoStats.completionPercent}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                >
+                  <div
+                    className={styles.progressFill}
+                    style={{ width: `${todoStats.completionPercent}%` }}
+                  />
+                </div>
+
+                <div className={styles.statGrid}>
+                  <div className={styles.stat}>
+                    <strong className={styles.statNumber}>
+                      {todoStats.totalTodos}
+                    </strong>
+                    <span className={styles.statLabel}>TOTAL</span>
+                  </div>
+                  <div className={styles.stat}>
+                    <strong className={styles.statNumber}>
+                      {todoStats.completedTodos}
+                    </strong>
+                    <span className={styles.statLabel}>COMPLETED</span>
+                  </div>
+                  <div className={styles.stat}>
+                    <strong className={styles.statNumber}>
+                      {todoStats.activeTodos}
+                    </strong>
+                    <span className={styles.statLabel}>ACTIVE</span>
+                  </div>
+                </div>
+              </>
+            )}
+          </section>
+        </div>
+      </main>
     </div>
   );
 }
