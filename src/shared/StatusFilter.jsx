@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router';
+import styles from "../styles/StatusFilter.module.css"
 
 function StatusFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,9 +16,10 @@ function StatusFilter() {
   };
 
   return (
-    <div>
-      <label htmlFor="statusFilter">Show:</label>
+    <div className={styles.container}>
+      <label className={styles.label} htmlFor="statusFilter">Show:</label>
       <select
+        className={styles.select}
         id="statusFilter"
         value={currentStatus}
         onChange={(e) => handleStatusChange(e.target.value)}

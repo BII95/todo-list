@@ -287,7 +287,7 @@ export default function TodosPage() {
             )}
 
             {isTodoListLoading && <p>Loading...</p>}
-            <div className={styles.filter}>
+            <div className={styles.filters}>
               <SortBy
                 onSortByChange={handleSortByChange}
                 onSortDirectionChange={handleSortDirectionChange}
