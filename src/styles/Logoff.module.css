@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logoffButton {
+  background: none;
+  border: none;
+  color:white;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.logoffButton:hover {
+  color: var(--text-primary);
+  background-color: rgba(212, 175, 55, 0.15);
+}
+
+.logoffButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #e05c5c;
+  font-size: 13px;
+  margin: 0;
+}

@@ -23,7 +23,7 @@ export default function ProfilePage() {
       try {
         setIsLoading(true);
         setError('');
-        const response = await fetch('/api/tasks', {
+        const response = await fetch('/api/tasks?limit=100', {
           method: 'GET',
           headers: { 'X-CSRF-TOKEN': token },
           credentials: 'include',
