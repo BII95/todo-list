@@ -1,29 +1,42 @@
+import styles from '../styles/AboutPage.module.css';
+
 export default function AboutPage() {
   return (
-    <>
-      <h1>About Todo List</h1>
-      <p>
-        This is a React-based todo application that helps you organize and
-        manage your tasks efficiently.
-      </p>
-      <section>
-        <h2>Features</h2>
-        <ul>
-          <li>Add new todos</li>
-          <li>Mark todos as complete</li>
-          <li>Edit existing todos</li>
-          <li>Sort todos by date or title</li>
-          <li>User authentication with protected routes</li>
-        </ul>
-      </section>
-      <section>
-        <h2>Built With</h2>
-        <ul>
-          <li>React 19.2.7</li>
-          <li>React Router 8</li>
-          <li>Vite 8</li>
-        </ul>
-      </section>
-    </>
+    <div className={styles.page}>
+      <main className={styles.container}>
+        <section className={styles.hero}>
+          <h1 className={styles.heading}>
+            Organize your tasks.{' '}
+            <span className={styles.accentText}>Ship your day.</span>
+          </h1>
+          <p className={styles.subtext}>
+            A React-based todo application built to help you track what matters
+            and clear it fast.
+          </p>
+        </section>
+
+        <div className={styles.cardGrid}>
+          <section className={styles.card}>
+            <h2 className={styles.cardHeading}>Features</h2>
+            <ul className={styles.list}>
+              <li>Add new todos</li>
+              <li>Mark todos as complete</li>
+              <li>Edit existing todos</li>
+              <li>Sort todos by date or title</li>
+              <li>User authentication with protected routes</li>
+            </ul>
+          </section>
+
+          <section className={styles.card}>
+            <h2 className={styles.cardHeading}>Built With</h2>
+            <ul className={styles.list}>
+              <li>React 19.2.7</li>
+              <li>React Router 8</li>
+              <li>Vite 8</li>
+            </ul>
+          </section>
+        </div>
+      </main>
+    </div>
   );
 }
