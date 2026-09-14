@@ -1,3 +1,4 @@
+import styles from '../styles/SortBy.module.css'
 export default function SortBy({
   sortBy,
   sortDirection,
@@ -8,6 +9,7 @@ export default function SortBy({
     <>
       <label htmlFor="sortOptions">Sort by:</label>
       <select
+        className={styles.select}
         name="sortOptions"
         id="sortOptions"
         value={sortBy}
@@ -19,6 +21,7 @@ export default function SortBy({
 
       <label htmlFor="orderOptions">Order:</label>
       <select
+        className={styles.select}
         name="orderOptions"
         id="orderOptions"
         value={sortDirection}
