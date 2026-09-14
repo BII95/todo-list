@@ -15,7 +15,15 @@ import StatusFilter from '../shared/StatusFilter';
 import styles from '../styles/TodosPage.module.css';
 
 export default function TodosPage() {
-  const { token } = useAuth();
+  const { token, name } = useAuth();
+  const today = new Date()
+    .toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'short',
+      day: 'numeric',
+    })
+    .toUpperCase();
+
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
   const {
     todoList,
@@ -239,6 +247,7 @@ export default function TodosPage() {
       });
     }
   }
+  const activeCount = todoList.filter((todo) => !todo.isCompleted).length;
 
   return (
     <>
@@ -246,12 +255,12 @@ export default function TodosPage() {
         <main className={styles.container}>
           <section className={styles.heading}>
             <div>
-              <p className={styles.date}>TODAY · SUNDAY, SEP 13</p>
-              <h1>Your Tasks, user </h1>
+              <p className={styles.date}>TODAY IS · {today}</p>
+              <h1>Your Todos, {name} </h1>
             </div>
 
             <div className={styles.remaining}>
-              <strong>#of todos left</strong>
+              <strong>{activeCount}</strong>
               <span>REMAINING</span>
             </div>
           </section>
