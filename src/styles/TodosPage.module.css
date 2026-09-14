@@ -42,3 +42,18 @@
   color: var(--text-secondary);
   font-size: 14px;
 }
+
+.filters {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1fr;
+  gap: 12px;
+
+  width: 100%;
+
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  padding: 18px;
+  margin-bottom: 30px;
+}
