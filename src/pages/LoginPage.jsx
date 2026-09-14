@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
+import styles from '../styles/LoginPage.module.css';
 
 export default function LoginPage() {
   const { login, isAuthenticated } = useAuth();
@@ -39,27 +40,62 @@ export default function LoginPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      {authError && <p>{authError}</p>}
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        type="text"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-        required
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-        required
-      />
-      <button type="submit" disabled={isLoggingOn}>
-        {isLoggingOn ? 'Logging in...' : 'Log On'}
-      </button>
-    </form>
+    <div className={styles.page}>
+      <div className={styles.brandPanel}>
+        <div className={styles.brandContent}>
+          <h1 className={styles.brandHeading}>
+            Get it <span className={styles.accentText}>done.</span>
+          </h1>
+        </div>
+      </div>
+
+      <div className={styles.formPanel}>
+        <div className={styles.formContent}>
+          <h2 className={styles.formHeading}>Sign in</h2>
+          <p className={styles.formSubtext}>Access your command center.</p>
+
+          <form onSubmit={handleSubmit} className={styles.form}>
+            {authError && <p className={styles.error}>{authError}</p>}
+
+            <div className={styles.field}>
+              <label htmlFor="email" className={styles.label}>
+                Email
+              </label>
+              <input
+                id="email"
+                type="text"
+                className={styles.input}
+                placeholder="alex@company.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label htmlFor="password" className={styles.label}>
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                className={styles.input}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className={styles.submitButton}
+              disabled={isLoggingOn}
+            >
+              {isLoggingOn ? 'Loggin in...' : 'Log on →'}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
