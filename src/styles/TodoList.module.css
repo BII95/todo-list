@@ -71,7 +71,30 @@
   border-color: var(--text-secondary);
 }
 
+.deleteButton {
+  background-color: transparent;
+  color: #e05c5c;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+
+  opacity: 0;
+  transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.todo:hover .deleteButton {
+  opacity: 1;
+}
+
 .deleteButton:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  background-color: rgba(224, 92, 92, 0.12);
+  border-color: #e05c5c;
+}
+
+.deleteButton:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }

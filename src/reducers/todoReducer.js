@@ -23,6 +23,10 @@ export const TODO_ACTIONS = {
   //error clearing
   CLEAR_ERROR: 'CLEAR_ERROR',
   CLEAR_FILTER_ERROR: 'CLEAR_FILTER_ERROR',
+  //delete todo operations
+  DELETE_TODO_START: 'DELETE_TODO_START',
+  DELETE_TODO_SUCCESS: 'DELETE_TODO_SUCCESS',
+  DELETE_TODO_ERROR: 'DELETE_TODO_ERROR',
 };
 export const initialTodoState = {
   todoList: [],
@@ -34,6 +38,12 @@ export const initialTodoState = {
   filterTerm: '',
   dataVersion: 0,
 };
+
+function insertAt(list, index, item) {
+  const copy = [...list];
+  copy.splice(index, 0, item);
+  return copy;
+}
 
 export function todoReducer(state, action) {
   switch (action.type) {
@@ -130,6 +140,31 @@ export function todoReducer(state, action) {
         ...state,
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.id ? action.payload.originalTodo : todo
+        ),
+        error: action.payload.message,
+      };
+    case TODO_ACTIONS.DELETE_TODO_START:
+      return {
+        ...state,
+        todoList: state.todoList.filter(
+          (todo) => todo.id !== action.payload.id
+        ),
+        error: '',
+      };
+
+    case TODO_ACTIONS.DELETE_TODO_SUCCESS:
+      return {
+        ...state,
+        dataVersion: state.dataVersion + 1,
+      };
+
+    case TODO_ACTIONS.DELETE_TODO_ERROR:
+      return {
+        ...state,
+        todoList: insertAt(
+          state.todoList,
+          action.payload.originalIndex,
+          action.payload.originalTodo
         ),
         error: action.payload.message,
       };

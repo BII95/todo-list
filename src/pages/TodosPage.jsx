@@ -249,6 +249,36 @@ export default function TodosPage() {
       });
     }
   }
+
+  async function deleteTodo(id) {
+    const originalIndex = todoList.findIndex((todo) => todo.id === id);
+    const originalTodo = todoList[originalIndex];
+
+    dispatch({ type: TODO_ACTIONS.DELETE_TODO_START, payload: { id } });
+
+    try {
+      const response = await fetch(`/api/tasks/${id}`, {
+        method: 'DELETE',
+        headers: { 'X-CSRF-TOKEN': token },
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete todo');
+      }
+      dispatch({ type: TODO_ACTIONS.DELETE_TODO_SUCCESS });
+    } catch (error) {
+      dispatch({
+        type: TODO_ACTIONS.DELETE_TODO_ERROR,
+        payload: {
+          id,
+          originalTodo,
+          originalIndex,
+          message: `Error deleting todo: ${originalTodo?.title ?? id} | Error message: ${error.message}`,
+        },
+      });
+    }
+  }
   const activeCount = todoList.filter((todo) => !todo.isCompleted).length;
 
   return (
@@ -326,6 +356,7 @@ export default function TodosPage() {
               onUpdateTodo={updateTodo}
               dataVersion={dataVersion}
               statusFilter={statusFilter}
+              onDeleteTodo={deleteTodo}
             />
           </div>
         </main>
