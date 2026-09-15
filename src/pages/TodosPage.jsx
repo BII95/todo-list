@@ -266,35 +266,42 @@ export default function TodosPage() {
           </section>
           <div>
             {error && (
-              <div>
-                <p>{error}</p>
-                <button
-                  onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}
-                >
-                  Clear Error
-                </button>
+              <div className={styles.errorBanner}>
+                <p className={styles.errorText}>{error}</p>
+                <div className={styles.errorActions}>
+                  <button
+                    className={styles.errorButton}
+                    onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}
+                  >
+                    Clear error
+                  </button>
+                </div>
               </div>
             )}
 
             {filterError && (
-              <div>
-                <p>{filterError}</p>
-                <button
-                  onClick={() =>
-                    dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })
-                  }
-                >
-                  Clear Filter Error
-                </button>
-
-                <button
-                  onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}
-                >
-                  Reset Filters
-                </button>
+              <div className={styles.errorBanner}>
+                <p className={styles.errorText}>{filterError}</p>
+                <div className={styles.errorActions}>
+                  <button
+                    className={styles.errorButton}
+                    onClick={() =>
+                      dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })
+                    }
+                  >
+                    Clear filter error
+                  </button>
+                  <button
+                    className={`${styles.errorButton} ${styles.errorButtonPrimary}`}
+                    onClick={() =>
+                      dispatch({ type: TODO_ACTIONS.RESET_FILTERS })
+                    }
+                  >
+                    Reset filters
+                  </button>
+                </div>
               </div>
             )}
-
             {isTodoListLoading && <p>Loading...</p>}
             <div className={styles.filters}>
               <SortBy
