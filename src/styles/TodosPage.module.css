@@ -1,0 +1,115 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.container {
+  width: min(1080px, 90%);
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 50px;
+}
+
+.heading h1 {
+  margin: 10px 0 0;
+  font-size: 42px;
+}
+
+.date {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.remaining {
+  text-align: center;
+}
+
+.remaining strong {
+  display: block;
+  color: var(--accent);
+  font-size: 48px;
+}
+
+.remaining span {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+
+  width: 100%;
+
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  padding: 18px;
+  margin-bottom: 30px;
+}
+.errorBanner {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(224, 92, 92, 0.35);
+  border-left: 3px solid #e05c5c;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.errorText {
+  color: #e05c5c;
+  font-size: 14px;
+  margin: 0;
+}
+
+.errorActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.errorButton {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.errorButton:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+}
+
+.errorButtonPrimary {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.errorButtonPrimary:hover {
+  background-color: rgba(212, 175, 55, 0.15);
+  color: var(--accent);
+}

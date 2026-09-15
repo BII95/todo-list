@@ -1,49 +1,47 @@
-import { NavLink } from "react-router";
-import { useAuth } from "../contexts/AuthContext";
+import { NavLink } from 'react-router';
+import { useAuth } from '../contexts/AuthContext';
+import styles from '../styles/Header.module.css';
 
-export default function Navigation(){
-    const {isAuthenticated}=useAuth();
-     const navStyle ={
-                listStyle: 'none', 
-                display: 'flex', 
-                gap: '1rem', 
-                padding: 0
+export default function Navigation() {
+  const { isAuthenticated } = useAuth();
+  
+  function navLinkStyle({ isActive }) {
+    return isActive ? `${styles.navLink} ${styles.active}` : styles.navLink;
+    };
+  
 
-            }
-    function navLinkStyle({isActive}){
-        return{
-            fontWeight: isActive ? "bold" : "normal",
-            textDecoration: isActive? "underline" : "none"
-        }
-    }    
-
-    return(
-        <nav>
-            <ul style = {navStyle}>
-                <li>
-                    <NavLink to= "/about" style={navLinkStyle}>
-                        About
-                    </NavLink>
-                </li>
-              {isAuthenticated ? 
-              ( 
-                <> 
-                <li> 
-                    <NavLink to="/todos" style={navLinkStyle}> Todos 
-                    </NavLink> 
-                </li> 
-                <li> 
-                    <NavLink to="/profile" style={navLinkStyle}> Profile </NavLink> 
-                </li> 
-    
-                </> ) : (       
-                    
-                <li>         
-                     <NavLink to="/login" style={navLinkStyle}> Login</NavLink> 
-                </li> )
-                } 
-                                
-            </ul>
-        </nav>
-    )
+  return (
+    <nav>
+      <ul className={styles.navStyle}>
+        <li>
+          <NavLink to="/about" className={navLinkStyle}>
+            About
+          </NavLink>
+        </li>
+        {isAuthenticated ? (
+          <>
+            <li>
+              <NavLink to="/todos" className={navLinkStyle}>
+                {' '}
+                Todos
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/profile" className={navLinkStyle}>
+                {' '}
+                Profile{' '}
+              </NavLink>
+            </li>
+          </>
+        ) : (
+          <li>
+            <NavLink to="/login" className={navLinkStyle}>
+              {' '}
+              Login
+            </NavLink>
+          </li>
+        )}
+      </ul>
+    </nav>
+  );
 }

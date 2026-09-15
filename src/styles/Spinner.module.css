@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.loader {
+  width: 24px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(farthest-side, var(--accent) 94%, #0000) top/4px 4px
+      no-repeat,
+    conic-gradient(#0000 30%, var(--accent));
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
+  animation: spin 4s infinite linear;
+}
+
+.label {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(1turn);
+  }
+}
