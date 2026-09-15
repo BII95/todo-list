@@ -26,6 +26,10 @@ This project is a React application created with Vite. It is a full-stack to-do 
 ## Screenshots
 -**Login Page**-
 ![Login page](./assests/Login_page_screenshot.png)
+![About page](./assests/About_screenshot.png)
+![Todos Page](./assests/Todos_screenshot.png)
+![Profile Page](./assests/Profile_screenshot.png)
+![Not Found Page](./assests/NF_screenshot.png)
 
 ## Installation
 
@@ -58,3 +62,28 @@ This project is a React application created with Vite. It is a full-stack to-do 
    ```
    http://localhost:5173
    ```
+
+## Design Decisions
+
+- **Dark, focused theme** — a dark navy blue background keeps the interface calm and puts emphasis on active states (hover, focus, completion) rather than decorative color. The chosen styling reflects a professional straight-forward user interface.
+
+- **Layered typography** — Arial is the base font for body text and default UI elements, defined once globally. On top of that, headings use a serif typeface (Georgia), and small data labels (stats, section eyebrows, feature lists) use a monospace stack to visually separate system-style information from regular content.
+
+- **CSS Modules per component** — each component owns its own scoped stylesheet, avoiding global class name collisions while sharing a common set of CSS custom properties (`--bg-primary`, `--accent`, `--border`, etc.) defined once at the root.
+
+
+- **Hover-revealed delete** — delete buttons stay visually quiet (invisible until the card is hovered or focused) to avoid cluttering the interface with destructive actions the user isn't actively engaging with, while still remaining keyboard-accessible via `:focus-visible`.
+
+## Future Improvements
+
+- Pagination or infinite scroll for accounts with a large number of todos, rather than a fixed request limit.
+- A confirmation step before deleting a todo (e.g. undo toast) to prevent accidental data loss.
+- Automated testing (unit tests for reducers/validation, integration tests for key user flows).
+-Consolidate the current per-component CSS module files into a theme system for easier styling consistency. (Learn Tailwind)
+
+## Contact
+Bryan Iturbide
+[GitHub](https://github.com/BII95)
+[Email](mailto:bryaniturbide1@gmail.com)
+
+
