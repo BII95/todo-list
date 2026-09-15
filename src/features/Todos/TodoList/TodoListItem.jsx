@@ -8,7 +8,7 @@ export default function TodoListItem({
   onCompleteTodo,
   onUpdateTodo,
   elementId,
-  onDeleteTodo
+  onDeleteTodo,
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [workingTitle, setWorkingTitle] = useState(todo.title);
@@ -44,10 +44,22 @@ export default function TodoListItem({
               onChange={handleEdit}
               elementId={elementId}
             />
-            <button type="button" onClick={() => handleCancel()}>
-              Cancel
-            </button>
-            <button type="submit">Update</button>
+            <div className={styles.editActions}>
+              <button
+                type="button"
+                className={styles.actionButton}
+                onClick={() => handleCancel()}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className={`${styles.actionButton} ${styles.actionButtonPrimary}`}
+                disabled={!isValidTodoTitle(workingTitle)}
+              >
+                Update
+              </button>
+            </div>
           </div>
         ) : (
           <div className={styles.todoContent}>
@@ -60,12 +72,14 @@ export default function TodoListItem({
                 onChange={() => onCompleteTodo(todo.id)}
               />
             </label>
-            <span
+            <button
+              type="button"
               className={styles.todoTitle}
               onClick={() => setIsEditing(true)}
+              aria-label={`Edit "${todo.title}"`}
             >
               {todo.title}
-            </span>
+            </button>
             <button
               type="button"
               className={styles.deleteButton}

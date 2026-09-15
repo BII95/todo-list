@@ -41,9 +41,27 @@
 }
 
 .todoTitle {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
   color: var(--text-primary);
   font-size: 17px;
-  margin: 0;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.todoTitle:hover {
+  color: var(--accent);
+}
+
+.todoTitle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .completed .todoTitle {
@@ -55,6 +73,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.editActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .actionButton {
@@ -69,6 +93,28 @@
 .actionButton:hover {
   color: var(--text-primary);
   border-color: var(--text-secondary);
+}
+
+.actionButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.actionButtonPrimary {
+  background-color: var(--accent);
+  color: #14110a;
+  border-color: var(--accent);
+  font-weight: bold;
+}
+
+.actionButtonPrimary:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.actionButtonPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .deleteButton {
