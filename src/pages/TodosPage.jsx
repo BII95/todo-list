@@ -14,7 +14,7 @@ import { useSearchParams } from 'react-router';
 import StatusFilter from '../shared/StatusFilter';
 import styles from '../styles/TodosPage.module.css';
 import Spinner from '../shared/Spinner';
-
+import { sanitizeText,getSafeErrorMessage } from '../utils/todoValidation';
 
 export default function TodosPage() {
   const { token, name } = useAuth();
@@ -85,7 +85,7 @@ export default function TodosPage() {
           dispatch({
             type: TODO_ACTIONS.FETCH_ERROR,
             payload: {
-              message: `Error filtering/sorting todos: ${error.message}`,
+              message: getSafeErrorMessage(error),
               isFilterError: true,
             },
           });
@@ -93,7 +93,7 @@ export default function TodosPage() {
           dispatch({
             type: TODO_ACTIONS.FETCH_ERROR,
             payload: {
-              message: `Error fetching todos: ${error.message}`,
+              message: getSafeErrorMessage(error),
               isFilterError: false,
             },
           });
@@ -135,7 +135,7 @@ export default function TodosPage() {
   async function addTodo(todoTitle) {
     let newTodo = {
       id: Date.now(),
-      title: todoTitle,
+      title: sanitizeText(todoTitle),
       isCompleted: false,
     };
     dispatch({ type: TODO_ACTIONS.ADD_TODO_START, payload: { newTodo } });
@@ -168,7 +168,7 @@ export default function TodosPage() {
         type: TODO_ACTIONS.ADD_TODO_ERROR,
         payload: {
           newTodoId: newTodo.id,
-          message: `Error adding todo: ${todoTitle}|Error message: ${error.message}`,
+          message: getSafeErrorMessage(error),
         },
       });
     }
@@ -201,7 +201,7 @@ export default function TodosPage() {
         payload: {
           id,
           originalTodo,
-          message: `Error completing todo: ${originalTodo?.title ?? id} | Error message: ${error.message}`,
+          message: getSafeErrorMessage(error),
         },
       });
     }
@@ -244,7 +244,7 @@ export default function TodosPage() {
         payload: {
           id: editedTodo.id,
           originalTodo,
-          message: `Error: ${error.message}`,
+          message: getSafeErrorMessage(error),
         },
       });
     }

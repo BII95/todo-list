@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import styles from '../styles/LoginPage.module.css';
-
+import { isValidEmail, isValidPassword, getSafeErrorMessage, MAX_LENGTHS } from '../utils/todoValidation';
 export default function LoginPage() {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -25,15 +25,18 @@ export default function LoginPage() {
   async function handleSubmit(event) {
     event.preventDefault();
     setAuthError('');
+    if (!isValidEmail(email) || !isValidPassword(password)) {
+      setAuthError('Please enter a valid email and password.');
+      return;
+    }
     setIsLoggingOn(true);
     try {
       const result = await login(email, password);
-
       if (!result.success) {
         setAuthError(result.error);
       }
     } catch (error) {
-      setAuthError(error.message);
+      setAuthError(getSafeErrorMessage(error));
     } finally {
       setIsLoggingOn(false);
     }
@@ -69,6 +72,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
+                maxLength={MAX_LENGTHS.email}
               />
             </div>
 
@@ -83,6 +87,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
+                maxLength={MAX_LENGTHS.password}
               />
             </div>
 

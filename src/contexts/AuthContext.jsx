@@ -39,16 +39,16 @@ export function AuthProvider({ children }) {
         setName(data.name);
         return { success: true };
       } else {
-        // Failure: Return error
         return {
           success: false,
-          error: `Authentication failed: ${data?.message}`,
+          error: 'Incorrect email or password.',
         };
       }
     } catch (error) {
+        console.error(error)
       return {
         success: false,
-        error: `Network error during login: ${error.message}`,
+        error: `Network error. Please try again.`,
       };
     }
   };
