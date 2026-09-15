@@ -29,7 +29,7 @@ This project is a React application created with Vite. It is a full-stack to-do 
 -**About page**-
 ![About page](./src/assets/About_screenshot.png)
 -**Todos page**-
-![Todos Page](./src/assets/Todos_screenshot.png)
+![Todos Page](./src/assets/Todos_screenshots.png)
 -**Profile page**-
 ![Profile Page](./src/assets/Profile_screenshot.png)
 -**Not Found page**-
