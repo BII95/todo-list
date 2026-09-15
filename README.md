@@ -1,4 +1,5 @@
-# To-Do List
+## Project Title
+-ToDo List
 
 ## Description
 
@@ -84,10 +85,10 @@ This project is a React application created with Vite. It is a full-stack to-do 
 - A confirmation step before deleting a todo (e.g. undo toast) to prevent accidental data loss.
 - Automated testing (unit tests for reducers/validation, integration tests for key user flows).
 -Consolidate the current per-component CSS module files into a theme system for easier styling consistency. (Learn Tailwind)
-## License
+## License Information
 -This project was created for educational purposes as part of CTD react course.
-## Live demo-link
--Not available at this time.
+## Available Scripts 
+- Live demo Not available at this time.
 
 
 ## Contact
