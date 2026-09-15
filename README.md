@@ -25,15 +25,15 @@ This project is a React application created with Vite. It is a full-stack to-do 
 
 ## Screenshots
 -**Login Page**-
-![Login page](./assets/Login_page_screenshot.png)
+![Login page](./src/assets/Login_page_screenshot.png)
 -**About page**-
-![About page](./assets/About_screenshot.png)
+![About page](./src/assets/About_screenshot.png)
 -**Todos page**-
-![Todos Page](./assets/Todos_screenshot.png)
+![Todos Page](./src/assets/Todos_screenshot.png)
 -**Profile page**-
-![Profile Page](./assets/Profile_screenshot.png)
+![Profile Page](./src/assets/Profile_screenshot.png)
 -**Not Found page**-
-![Not Found Page](./assets/NF_screenshot.png)
+![Not Found Page](./src/assets/NF_screenshot.png)
 
 ## Installation
 
