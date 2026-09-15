@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router';
 import styles from '../styles/Logoff.module.css';
+import Spinner from '../shared/spinner';
 
 export default function Logoff() {
   const { logout} = useAuth();
@@ -28,6 +29,7 @@ export default function Logoff() {
         onClick={handleLogoff}
         disabled={isLoggingOff}
       >
+        {isLoggingOff && <Spinner />}
         {isLoggingOff ? 'Logging off…' : 'Log off'}
       </button>
     </div>

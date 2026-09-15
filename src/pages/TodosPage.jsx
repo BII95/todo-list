@@ -13,6 +13,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { useSearchParams } from 'react-router';
 import StatusFilter from '../shared/StatusFilter';
 import styles from '../styles/TodosPage.module.css';
+import Spinner from '../shared/Spinner';
+
 
 export default function TodosPage() {
   const { token, name } = useAuth();
@@ -302,7 +304,7 @@ export default function TodosPage() {
                 </div>
               </div>
             )}
-            {isTodoListLoading && <p>Loading...</p>}
+            {isTodoListLoading && <Spinner label="Loading todos..."/>}
             <div className={styles.filters}>
               <SortBy
                 onSortByChange={handleSortByChange}

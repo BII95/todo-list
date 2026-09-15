@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import styles from '../styles/ProfilePage.module.css';
+import Spinner from '../shared/spinner';
 
 export default function ProfilePage() {
   const { email, name, token } = useAuth();
@@ -97,9 +98,7 @@ export default function ProfilePage() {
           <section className={styles.card}>
             <h2 className={styles.cardHeading}>Todo Statistics</h2>
 
-            {isLoading && (
-              <p className={styles.status}>Loading statistics...</p>
-            )}
+            {isLoading && <Spinner label="Loading statistics..." />}
             {!isLoading && error && (
               <p className={styles.error} role="alert">
                 {error}

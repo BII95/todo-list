@@ -4,6 +4,9 @@
   gap: 16px;
 }
 .logoffButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;  
   background: none;
   border: none;
   color:white;
