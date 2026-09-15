@@ -4,8 +4,9 @@
 ## Description
 
 This project is a React application created with Vite. It is a full-stack to-do list application. It features, authentication, sorting,filtering and client-side validation in a dark theme-UI.
-
-## Features
+## Live Demo Link
+-Not available at this time
+## Features List
 
 -**Add,edit,complete,update, and delete todos**-The Optmistic UI allows you to add a Todo instance instantly and rolls back if request fails. Editing can be done by clicking on the todo and hitting update.Clicking the checkbox completes the todo. A red button at the end of each todo allows to delete it if desired.
 - **Sort and filter** — sort by creation date or title (ascending/descending), filter by status (all/active/completed), and search by title with debounced input to avoid excessive API calls.
@@ -36,7 +37,7 @@ This project is a React application created with Vite. It is a full-stack to-do 
 -**Not Found page**-
 ![Not Found Page](./src/assets/NF_screenshot.png)
 
-## Installation
+## Getting Started
 
 1. Clone the repository:
 
@@ -67,6 +68,12 @@ This project is a React application created with Vite. It is a full-stack to-do 
    ```
    http://localhost:5173
    ```
+## Available Scripts
+
+-`npm run dev`: Starts the Vite development server with hot reload 
+-`npm run build`:Builds the app for production                     
+-`npm run preview`: Serves the production build locally for testing 
+-`npm run lint`:Runs ESLint across the project
 
 ## Design Decisions
 
@@ -87,8 +94,6 @@ This project is a React application created with Vite. It is a full-stack to-do 
 -Consolidate the current per-component CSS module files into a theme system for easier styling consistency. (Learn Tailwind)
 ## License Information
 -This project was created for educational purposes as part of CTD react course.
-## Available Scripts 
-- Live demo Not available at this time.
 
 
 ## Contact
