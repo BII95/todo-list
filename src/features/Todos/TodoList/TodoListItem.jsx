@@ -69,7 +69,7 @@ export default function TodoListItem({
                 type="checkbox"
                 id={`checkbox${todo.id}`}
                 checked={todo.isCompleted}
-                onChange={() => onCompleteTodo(todo.id)}
+                onChange={() => onCompleteTodo(todo.id, !todo.isCompleted)}
               />
             </label>
             <button

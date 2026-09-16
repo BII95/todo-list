@@ -173,10 +173,10 @@ export default function TodosPage() {
       });
     }
   }
-  async function completeTodo(id) {
+  async function completeTodo(id,isCompleted) {
     const originalTodo = todoList.find((todo) => todo.id === id);
     ///
-    dispatch({ type: TODO_ACTIONS.COMPLETE_TODO_START, payload: { id } });
+    dispatch({ type: TODO_ACTIONS.COMPLETE_TODO_START, payload: { id,isCompleted }, });
 
     try {
       const response = await fetch(`/api/tasks/${id}`, {
@@ -187,7 +187,7 @@ export default function TodosPage() {
         },
         credentials: 'include',
         body: JSON.stringify({
-          isCompleted: true,
+          isCompleted,
         }),
       });
 
