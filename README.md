@@ -28,10 +28,12 @@ This project is a React application created with Vite. It is a full-stack to-do 
 ## Screenshots
 -**Login Page**-
 ![Login page](./src/assets/Login_page_screenshot.png)
+![Login page mobile](./src/assets/Login_page_mobile.png)
 -**About page**-
 ![About page](./src/assets/About_screenshot.png)
 -**Todos page**-
 ![Todos Page](./src/assets/Todos_screenshots.png)
+![Todos Page mobile](./src/assets/Todos_page_mobile.png)
 -**Profile page**-
 ![Profile Page](./src/assets/Profile_screenshot.png)
 -**Not Found page**-
