@@ -38,7 +38,7 @@ export default function TodoListItem({
     >
       <form onSubmit={handleUpdate}>
         {isEditing ? (
-          <div className={styles.todoContent}>
+          <div className={styles.editRow}>
             <TextInputWithLabel
               value={workingTitle}
               onChange={handleEdit}

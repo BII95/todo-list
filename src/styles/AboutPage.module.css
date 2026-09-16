@@ -4,14 +4,14 @@
 }
 
 .container {
-  width: min(1080px, 90%);
+  width: min(1080px, 92%);
   margin: 0 auto;
-  padding: 60px 0;
+  padding: 40px 0;
 }
 
 .hero {
   max-width: 620px;
-  margin-bottom: 50px;
+  margin-bottom: 36px;
 }
 
 .eyebrow {
@@ -19,15 +19,15 @@
   font-size: 12px;
   letter-spacing: 2px;
   color: var(--text-secondary);
-  margin: 0 0 18px;
+  margin: 0 0 16px;
 }
 
 .heading {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 1.2;
   color: var(--text-primary);
-  margin: 0 0 20px;
+  margin: 0 0 16px;
 }
 
 .accentText {
@@ -36,29 +36,29 @@
 
 .subtext {
   color: var(--text-secondary);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   margin: 0;
 }
 
 .cardGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .card {
   background-color: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 32px;
+  padding: 24px;
 }
 
 .cardHeading {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 20px;
+  font-size: 19px;
   color: var(--text-primary);
-  margin: 0 0 22px;
+  margin: 0 0 20px;
 }
 
 .list {
@@ -90,8 +90,37 @@
   background-color: var(--accent);
 }
 
-@media (max-width: 720px) {
+@media (min-width: 640px) {
+  .container {
+    padding: 60px 0;
+  }
+
+  .hero {
+    margin-bottom: 50px;
+  }
+
+  .heading {
+    font-size: 40px;
+    margin: 0 0 20px;
+  }
+
+  .subtext {
+    font-size: 16px;
+  }
+
+  .card {
+    padding: 32px;
+  }
+
+  .cardHeading {
+    font-size: 20px;
+    margin: 0 0 22px;
+  }
+}
+
+@media (min-width: 768px) {
   .cardGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
 }

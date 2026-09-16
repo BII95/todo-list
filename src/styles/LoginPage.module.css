@@ -1,26 +1,27 @@
 .page {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg-primary);
 }
 
 .brandPanel {
   display: flex;
   align-items: center;
-  padding: 60px;
+  padding: 40px 24px;
 }
 
 .brandContent {
   max-width: 420px;
+  margin: 0 auto;
 }
 
 .brandHeading {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 44px;
+  font-size: 32px;
   line-height: 1.15;
   color: var(--text-primary);
-  margin: 0 0 24px;
+  margin: 0 0 20px;
 }
 
 .accentText {
@@ -29,9 +30,9 @@
 
 .brandSubtext {
   color: var(--text-secondary);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
-  margin: 0 0 60px;
+  margin: 0 0 40px;
   max-width: 32ch;
 }
 
@@ -39,8 +40,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px;
-  border-left: 1px solid var(--border);
+  padding: 40px 24px;
+  border-top: 1px solid var(--border);
 }
 
 .formContent {
@@ -50,7 +51,7 @@
 
 .formHeading {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 32px;
+  font-size: 28px;
   color: var(--text-primary);
   margin: 0 0 8px;
 }
@@ -58,13 +59,13 @@
 .formSubtext {
   color: var(--text-secondary);
   font-size: 15px;
-  margin: 0 0 36px;
+  margin: 0 0 30px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 .field {
@@ -86,7 +87,7 @@
   border: 1px solid var(--border);
   border-radius: 5px;
   padding: 14px 16px;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .input::placeholder {
@@ -141,4 +142,49 @@
 
 .footerLink:hover {
   text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .page {
+    flex-direction: row;
+    min-height: 100vh;
+  }
+
+  .brandPanel {
+    flex: 1;
+    padding: 60px;
+  }
+
+  .brandHeading {
+    font-size: 44px;
+    margin: 0 0 24px;
+  }
+
+  .brandSubtext {
+    font-size: 16px;
+    margin: 0 0 60px;
+  }
+
+  .formPanel {
+    flex: 1;
+    padding: 60px;
+    border-top: none;
+    border-left: 1px solid var(--border);
+  }
+
+  .formHeading {
+    font-size: 32px;
+  }
+
+  .formSubtext {
+    margin: 0 0 36px;
+  }
+
+  .form {
+    gap: 22px;
+  }
+
+  .input {
+    font-size: 15px;
+  }
 }

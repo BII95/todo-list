@@ -4,14 +4,14 @@
 }
 
 .container {
-  width: min(1080px, 90%);
+  width: min(1080px, 92%);
   margin: 0 auto;
-  padding: 60px 0;
+  padding: 40px 0;
 }
 
 .hero {
   max-width: 620px;
-  margin-bottom: 50px;
+  margin-bottom: 36px;
 }
 
 .eyebrow {
@@ -19,12 +19,12 @@
   font-size: 12px;
   letter-spacing: 2px;
   color: var(--text-secondary);
-  margin: 0 0 18px;
+  margin: 0 0 16px;
 }
 
 .heading {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 1.2;
   color: var(--text-primary);
   margin: 0 0 12px;
@@ -36,28 +36,29 @@
 
 .subtext {
   color: var(--text-secondary);
-  font-size: 15px;
+  font-size: 14px;
   margin: 0;
+  word-break: break-word;
 }
 
 .cardGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .card {
   background-color: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 32px;
+  padding: 24px;
 }
 
 .cardHeading {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 20px;
+  font-size: 19px;
   color: var(--text-primary);
-  margin: 0 0 24px;
+  margin: 0 0 20px;
 }
 
 /* Account info */
@@ -71,8 +72,10 @@
 
 .infoRow {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
+  gap: 4px;
   font-size: 14px;
 }
 
@@ -87,6 +90,7 @@
 .infoRow dd {
   margin: 0;
   color: var(--text-primary);
+  word-break: break-word;
 }
 
 /* Progress bar */
@@ -119,7 +123,7 @@
   border: 1px solid var(--border);
   border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .progressFill {
@@ -134,7 +138,7 @@
 .statGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 12px;
 }
 
 .stat {
@@ -147,12 +151,12 @@
 
 .statNumber {
   color: var(--accent);
-  font-size: 32px;
+  font-size: 26px;
 }
 
 .statLabel {
   font-family: ui-monospace, 'SF Mono', Consolas, monospace;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 1.5px;
   color: var(--text-secondary);
 }
@@ -169,8 +173,52 @@
   margin: 0;
 }
 
-@media (max-width: 720px) {
+@media (min-width: 640px) {
+  .container {
+    padding: 60px 0;
+  }
+
+  .hero {
+    margin-bottom: 50px;
+  }
+
+  .heading {
+    font-size: 40px;
+  }
+
+  .subtext {
+    font-size: 15px;
+  }
+
+  .card {
+    padding: 32px;
+  }
+
+  .cardHeading {
+    font-size: 20px;
+    margin: 0 0 24px;
+  }
+
+  .progressTrack {
+    margin-bottom: 28px;
+  }
+
+  .statNumber {
+    font-size: 32px;
+  }
+
+  .statLabel {
+    font-size: 11px;
+  }
+
+  .statGrid {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 768px) {
   .cardGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
 }

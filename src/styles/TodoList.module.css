@@ -6,14 +6,16 @@
 
 .todo {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 
   background-color: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 6px;
 
-  padding: 20px 24px;
+  padding: 16px 18px;
 
   transition:
     border-color 0.2s ease,
@@ -30,6 +32,7 @@
   align-items: center;
   gap: 16px;
   min-width: 0;
+  flex: 1 1 200px;
 }
 
 .checkbox {
@@ -49,10 +52,11 @@
   padding: 0;
   margin: 0;
   color: var(--text-primary);
-  font-size: 17px;
+  font-size: 16px;
   font-family: inherit;
   cursor: pointer;
   border-radius: 4px;
+  overflow-wrap: break-word;
 }
 
 .todoTitle:hover {
@@ -126,12 +130,12 @@
   font-size: 13px;
   cursor: pointer;
 
-  opacity: 0;
-  transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.todo:hover .deleteButton {
+  /* Visible by default: no hover state exists on touch devices */
   opacity: 1;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .deleteButton:hover {
@@ -143,4 +147,56 @@
   opacity: 1;
   outline: 2px solid var(--accent);
   outline-offset: 1px;
+}
+.editRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.editRow label {
+  display: none;
+}
+
+.editRow input[type='text'] {
+  flex: 1 1 100%;
+  min-width: 0;
+  background-color: #111820;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 16px;
+}
+
+.editRow input[type='text']:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+@media (min-width: 640px) {
+  .editRow input[type='text'] {
+    flex: 1 1 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .todo {
+    flex-wrap: nowrap;
+    padding: 20px 24px;
+  }
+
+  .todoTitle {
+    font-size: 17px;
+  }
+
+  .deleteButton {
+    opacity: 0;
+  }
+
+  .todo:hover .deleteButton {
+    opacity: 1;
+  }
 }
