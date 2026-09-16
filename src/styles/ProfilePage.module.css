@@ -1,0 +1,224 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.container {
+  width: min(1080px, 92%);
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.hero {
+  max-width: 620px;
+  margin-bottom: 36px;
+}
+
+.eyebrow {
+  font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+}
+
+.heading {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+}
+
+.accentText {
+  color: var(--accent);
+}
+
+.subtext {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin: 0;
+  word-break: break-word;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.cardHeading {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 19px;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+}
+
+/* Account info */
+
+.infoList {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.infoRow dt {
+  font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.infoRow dd {
+  margin: 0;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+/* Progress bar */
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.progressLabel {
+  font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.progressPercent {
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 8px;
+  background-color: #111820;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--accent);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* Stat grid */
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.statNumber {
+  color: var(--accent);
+  font-size: 26px;
+}
+
+.statLabel {
+  font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-secondary);
+}
+
+.status {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin: 0;
+}
+
+.error {
+  color: #e05c5c;
+  font-size: 14px;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 60px 0;
+  }
+
+  .hero {
+    margin-bottom: 50px;
+  }
+
+  .heading {
+    font-size: 40px;
+  }
+
+  .subtext {
+    font-size: 15px;
+  }
+
+  .card {
+    padding: 32px;
+  }
+
+  .cardHeading {
+    font-size: 20px;
+    margin: 0 0 24px;
+  }
+
+  .progressTrack {
+    margin-bottom: 28px;
+  }
+
+  .statNumber {
+    font-size: 32px;
+  }
+
+  .statLabel {
+    font-size: 11px;
+  }
+
+  .statGrid {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cardGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
