@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router';
 import styles from '../styles/Logoff.module.css';
-import Spinner from '../shared/spinner';
+import Spinner from '../shared/Spinner';
 
 export default function Logoff() {
   const { logout } = useAuth();
