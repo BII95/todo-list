@@ -1,21 +1,25 @@
 ## Project Title
+
 -ToDo List
 
 ## Description
 
 This project is a React application created with Vite. It is a full-stack to-do list application. It features, authentication, sorting,filtering and client-side validation in a dark theme-UI.
+
 ## Live Demo Link
+
 -Not available at this time
+
 ## Features List
 
 -**Add,edit,complete,update, and delete todos**-The Optmistic UI allows you to add a Todo instance instantly and rolls back if request fails. Editing can be done by clicking on the todo and hitting update.Clicking the checkbox completes the todo. A red button at the end of each todo allows to delete it if desired.
+
 - **Sort and filter** — sort by creation date or title (ascending/descending), filter by status (all/active/completed), and search by title with debounced input to avoid excessive API calls.
 - **User authentication** — email/password login with protected routes using useAuth hook; unauthenticated users are redirected to `/login` and returned to their intended page after signing in.
 - **Profile dashboard** — displays account info and live todo statistics (total, completed, active, completion percentage) with a visual progress bar.
 - **Client-side validation** — required-field checks, maximum length limits, and basic email format validation on all text inputs before data is sent to the API.
 - **Safe error handling** — user-facing error messages are generic and non-technical; raw errors are logged to the console for debugging instead of being exposed in the UI.
 - **Responsive-in-progress UI** —layouts (About, Profile, 404) adapt to smaller screens.
-
 
 ## Technologies Used
 
@@ -26,21 +30,20 @@ This project is a React application created with Vite. It is a full-stack to-do 
 - **`useReducer` + Context API** — centralized state management for todos and authentication, without an external state library
 
 ## Screenshots
+
 -**Login Page**-
 ![Login page](./src/assets/Login_page_screenshot.png)
 ![Login page mobile](./src/assets/Login_page_mobile.png)
 
-
 -**About page**-
 ![About page](./src/assets/About_screenshot.png)
--**Todos page**-
+\-**Todos page**-
 ![Todos Page](./src/assets/Todos_screenshots.png)
 ![Todos Page mobile](./src/assets/Todos_page_mobile.png)
 
-
 -**Profile page**-
 ![Profile Page](./src/assets/Profile_screenshot.png)
--**Not Found page**-
+\-**Not Found page**-
 ![Not Found Page](./src/assets/NF_screenshot.png)
 
 ## Getting Started
@@ -74,12 +77,13 @@ This project is a React application created with Vite. It is a full-stack to-do 
    ```
    http://localhost:5173
    ```
+
 ## Available Scripts
 
--`npm run dev`: Starts the Vite development server with hot reload 
--`npm run build`:Builds the app for production                     
--`npm run preview`: Serves the production build locally for testing 
--`npm run lint`:Runs ESLint across the project
+-`npm run dev`: Starts the Vite development server with hot reload
+\-`npm run build`:Builds the app for production  
+-`npm run preview`: Serves the production build locally for testing
+\-`npm run lint`:Runs ESLint across the project
 
 ## Design Decisions
 
@@ -89,7 +93,6 @@ This project is a React application created with Vite. It is a full-stack to-do 
 
 - **CSS Modules per component** — each component owns its own scoped stylesheet, avoiding global class name collisions while sharing a common set of CSS custom properties (`--bg-primary`, `--accent`, `--border`, etc.) defined once at the root.
 
-
 - **Hover-revealed delete** — delete buttons stay visually quiet (invisible until the card is hovered or focused) to avoid cluttering the interface with destructive actions the user isn't actively engaging with, while still remaining keyboard-accessible via `:focus-visible`.
 
 ## Future Improvements
@@ -97,14 +100,14 @@ This project is a React application created with Vite. It is a full-stack to-do 
 - Pagination or infinite scroll for accounts with a large number of todos, rather than a fixed request limit.
 - A confirmation step before deleting a todo (e.g. undo toast) to prevent accidental data loss.
 - Automated testing (unit tests for reducers/validation, integration tests for key user flows).
--Consolidate the current per-component CSS module files into a theme system for easier styling consistency. (Learn Tailwind)
+  -Consolidate the current per-component CSS module files into a theme system for easier styling consistency. (Learn Tailwind)
+
 ## License Information
+
 -This project was created for educational purposes as part of CTD react course.
 
-
 ## Contact
+
 Bryan Iturbide
 [GitHub](https://github.com/BII95)
 [Email](mailto:bryaniturbide1@gmail.com)
-
-

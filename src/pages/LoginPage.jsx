@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import styles from '../styles/LoginPage.module.css';
-import { isValidEmail, isValidPassword, getSafeErrorMessage, MAX_LENGTHS } from '../utils/todoValidation';
+import {
+  isValidEmail,
+  isValidPassword,
+  getSafeErrorMessage,
+  MAX_LENGTHS,
+} from '../utils/todoValidation';
 export default function LoginPage() {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();

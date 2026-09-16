@@ -5,7 +5,7 @@ import styles from '../styles/Logoff.module.css';
 import Spinner from '../shared/spinner';
 
 export default function Logoff() {
-  const { logout} = useAuth();
+  const { logout } = useAuth();
   const [logoffError, setLogoffError] = useState('');
   const [isLoggingOff, setIsLoggingOff] = useState(false);
   const navigate = useNavigate();

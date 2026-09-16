@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import styles from '../styles/ProfilePage.module.css';
-import Spinner from '../shared/spinner';
+import Spinner from '../shared/Spinner';
 
 export default function ProfilePage() {
   const { email, name, token } = useAuth();

@@ -1,10 +1,12 @@
-import styles from '../styles/FilterInput.module.css'
+import styles from '../styles/FilterInput.module.css';
 import { MAX_LENGTHS } from '../utils/todoValidation';
 export default function FilterInput({ filterTerm, onFilterChange }) {
   return (
     <>
       <div>
-        <label htmlFor="filterInput" className={styles.label}>Search todos:</label>
+        <label htmlFor="filterInput" className={styles.label}>
+          Search todos:
+        </label>
         <input
           className={styles.input}
           id="filterInput"

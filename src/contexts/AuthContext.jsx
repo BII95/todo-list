@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
         };
       }
     } catch (error) {
-        console.error(error)
+      console.error(error);
       return {
         success: false,
         error: `Network error. Please try again.`,

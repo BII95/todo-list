@@ -4,11 +4,10 @@ import styles from '../styles/Header.module.css';
 
 export default function Navigation() {
   const { isAuthenticated } = useAuth();
-  
+
   function navLinkStyle({ isActive }) {
     return isActive ? `${styles.navLink} ${styles.active}` : styles.navLink;
-    };
-  
+  }
 
   return (
     <nav>
