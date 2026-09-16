@@ -14,7 +14,7 @@ import { useSearchParams } from 'react-router';
 import StatusFilter from '../shared/StatusFilter';
 import styles from '../styles/TodosPage.module.css';
 import Spinner from '../shared/Spinner';
-import { sanitizeText,getSafeErrorMessage } from '../utils/todoValidation';
+import { sanitizeText, getSafeErrorMessage } from '../utils/todoValidation';
 
 export default function TodosPage() {
   const { token, name } = useAuth();
@@ -59,13 +59,19 @@ export default function TodosPage() {
           headers: { 'X-CSRF-TOKEN': token },
           credentials: 'include',
         });
+        if (response.status === 404) {
+          dispatch({
+            type: TODO_ACTIONS.FETCH_SUCCESS,
+            payload: { todos: [] },
+          });
+          return;
+        }
+
         if (!response.ok) {
           throw new Error(
             response.status === 401
               ? 'Unauthorized'
-              : response.status === 404
-                ? 'Not Found'
-                : `Request failed with status ${response.status}`
+              : `Request failed with status ${response.status}`
           );
         }
         const data = await response.json();
@@ -173,10 +179,13 @@ export default function TodosPage() {
       });
     }
   }
-  async function completeTodo(id,isCompleted) {
+  async function completeTodo(id, isCompleted) {
     const originalTodo = todoList.find((todo) => todo.id === id);
     ///
-    dispatch({ type: TODO_ACTIONS.COMPLETE_TODO_START, payload: { id,isCompleted }, });
+    dispatch({
+      type: TODO_ACTIONS.COMPLETE_TODO_START,
+      payload: { id, isCompleted },
+    });
 
     try {
       const response = await fetch(`/api/tasks/${id}`, {
@@ -334,7 +343,7 @@ export default function TodosPage() {
                 </div>
               </div>
             )}
-            {isTodoListLoading && <Spinner label="Loading todos..."/>}
+            {isTodoListLoading && <Spinner label="Loading todos..." />}
             <div className={styles.filters}>
               <SortBy
                 onSortByChange={handleSortByChange}
