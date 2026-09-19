@@ -53,6 +53,7 @@ function TodoList({
           onCompleteTodo={onCompleteTodo}
           onUpdateTodo={onUpdateTodo}
           onDeleteTodo={onDeleteTodo}
+          elementId={`todo-title-${todo.title}`}
         />
       ))}
     </ul>
