@@ -167,7 +167,7 @@ export default function TodosPage() {
 
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_SUCCESS,
-        payload: { newTodoID: newTodo.id, savedTodo },
+        payload: { newTodoId: newTodo.id, savedTodo },
       });
     } catch (error) {
       dispatch({
