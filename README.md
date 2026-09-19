@@ -100,7 +100,8 @@ This project is a React application created with Vite. It is a full-stack to-do 
 - Pagination or infinite scroll for accounts with a large number of todos, rather than a fixed request limit.
 - A confirmation step before deleting a todo (e.g. undo toast) to prevent accidental data loss.
 - Automated testing (unit tests for reducers/validation, integration tests for key user flows).
-  -Consolidate the current per-component CSS module files into a theme system for easier styling consistency. (Learn Tailwind)
+-Consolidate the current per-component CSS module files into a theme system for easier styling consistency. (Learn Tailwind)
+- Add basic automated tests for reducer transitions and critical CRUD/auth flows to prevent regressions.
 
 ## License Information
 
