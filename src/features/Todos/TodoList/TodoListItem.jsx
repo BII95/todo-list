@@ -43,6 +43,7 @@ export default function TodoListItem({
               value={workingTitle}
               onChange={handleEdit}
               elementId={elementId}
+              labelText="Todo title"
             />
             <div className={styles.editActions}>
               <button
